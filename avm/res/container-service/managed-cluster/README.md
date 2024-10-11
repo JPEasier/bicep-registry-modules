@@ -1812,7 +1812,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
         vmSize: 'Standard_DS2_v2'
       }
     ]
-    autoUpgradeProfileUpgradeChannel: 'stable'
+    autoUpgradeProfileUpgradeChannel: 'node-image'
     diagnosticSettings: [
       {
         eventHubAuthorizationRuleResourceId: '<eventHubAuthorizationRuleResourceId>'
@@ -1844,8 +1844,23 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
     disableLocalAccounts: true
     dnsServiceIP: '10.10.200.10'
     enableAzureDefender: true
+    enableKeyvaultSecretsProvider: true
     enablePrivateCluster: true
     location: '<location>'
+    maintenanceConfiguration: {
+      maintenanceWindow: {
+        durationHours: 4
+        schedule: {
+          weekly: {
+            dayOfWeek: 'Sunday'
+            intervalWeeks: 1
+          }
+        }
+        startDate: '2024-07-15'
+        startTime: '00:00'
+        utcOffset: '+00:00'
+      }
+    }
     managedIdentities: {
       userAssignedResourcesIds: [
         '<managedIdentityResourceId>'
@@ -1956,7 +1971,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
       ]
     },
     "autoUpgradeProfileUpgradeChannel": {
-      "value": "stable"
+      "value": "node-image"
     },
     "diagnosticSettings": {
       "value": [
@@ -1997,11 +2012,30 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
     "enableAzureDefender": {
       "value": true
     },
+    "enableKeyvaultSecretsProvider": {
+      "value": true
+    },
     "enablePrivateCluster": {
       "value": true
     },
     "location": {
       "value": "<location>"
+    },
+    "maintenanceConfiguration": {
+      "value": {
+        "maintenanceWindow": {
+          "durationHours": 4,
+          "schedule": {
+            "weekly": {
+              "dayOfWeek": "Sunday",
+              "intervalWeeks": 1
+            }
+          },
+          "startDate": "2024-07-15",
+          "startTime": "00:00",
+          "utcOffset": "+00:00"
+        }
+      }
     },
     "managedIdentities": {
       "value": {
@@ -2122,7 +2156,7 @@ param agentPools = [
     vmSize: 'Standard_DS2_v2'
   }
 ]
-param autoUpgradeProfileUpgradeChannel = 'stable'
+param autoUpgradeProfileUpgradeChannel = 'node-image'
 param diagnosticSettings = [
   {
     eventHubAuthorizationRuleResourceId: '<eventHubAuthorizationRuleResourceId>'
@@ -2154,8 +2188,23 @@ param diagnosticSettings = [
 param disableLocalAccounts = true
 param dnsServiceIP = '10.10.200.10'
 param enableAzureDefender = true
+param enableKeyvaultSecretsProvider = true
 param enablePrivateCluster = true
 param location = '<location>'
+param maintenanceConfiguration = {
+  maintenanceWindow: {
+    durationHours: 4
+    schedule: {
+      weekly: {
+        dayOfWeek: 'Sunday'
+        intervalWeeks: 1
+      }
+    }
+    startDate: '2024-07-15'
+    startTime: '00:00'
+    utcOffset: '+00:00'
+  }
+}
 param managedIdentities = {
   userAssignedResourcesIds: [
     '<managedIdentityResourceId>'
