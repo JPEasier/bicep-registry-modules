@@ -32,171 +32,13 @@ The following section provides usage examples for the module, which were used to
 
 >**Note**: To reference the module, please use the following syntax `br/public:avm/res/container-service/managed-cluster:<version>`.
 
-- [Using only defaults and use AKS Automatic mode](#example-1-using-only-defaults-and-use-aks-automatic-mode)
-- [Using Azure CNI Network Plugin.](#example-2-using-azure-cni-network-plugin)
-- [Using only defaults](#example-3-using-only-defaults)
-- [Using Kubenet Network Plugin.](#example-4-using-kubenet-network-plugin)
-- [Using Private Cluster.](#example-5-using-private-cluster)
-- [WAF-aligned](#example-6-waf-aligned)
+- [Using Azure CNI Network Plugin.](#example-1-using-azure-cni-network-plugin)
+- [Using only defaults](#example-2-using-only-defaults)
+- [Using Kubenet Network Plugin.](#example-3-using-kubenet-network-plugin)
+- [Using Private Cluster.](#example-4-using-private-cluster)
+- [WAF-aligned](#example-5-waf-aligned)
 
-### Example 1: _Using only defaults and use AKS Automatic mode_
-
-This instance deploys the module with the set of automatic parameters.
-
-
-<details>
-
-<summary>via Bicep module</summary>
-
-```bicep
-module managedCluster 'br/public:avm/res/container-service/managed-cluster:<version>' = {
-  name: 'managedClusterDeployment'
-  params: {
-    // Required parameters
-    name: 'csauto001'
-    primaryAgentPoolProfile: [
-      {
-        availabilityZones: []
-        count: 3
-        mode: 'System'
-        name: 'systempool'
-        vmSize: 'Standard_DS2_v2'
-      }
-    ]
-    // Non-required parameters
-    location: '<location>'
-    maintenanceConfiguration: {
-      maintenanceWindow: {
-        durationHours: 4
-        schedule: {
-          absoluteMonthly: '<absoluteMonthly>'
-          daily: '<daily>'
-          relativeMonthly: '<relativeMonthly>'
-          weekly: {
-            dayOfWeek: 'Sunday'
-            intervalWeeks: 1
-          }
-        }
-        startDate: '2024-07-03'
-        startTime: '00:00'
-        utcOffset: '+00:00'
-      }
-    }
-    managedIdentities: {
-      systemAssigned: true
-    }
-  }
-}
-```
-
-</details>
-<p>
-
-<details>
-
-<summary>via JSON parameters file</summary>
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    // Required parameters
-    "name": {
-      "value": "csauto001"
-    },
-    "primaryAgentPoolProfile": {
-      "value": [
-        {
-          "availabilityZones": [],
-          "count": 3,
-          "mode": "System",
-          "name": "systempool",
-          "vmSize": "Standard_DS2_v2"
-        }
-      ]
-    },
-    // Non-required parameters
-    "location": {
-      "value": "<location>"
-    },
-    "maintenanceConfiguration": {
-      "value": {
-        "maintenanceWindow": {
-          "durationHours": 4,
-          "schedule": {
-            "absoluteMonthly": "<absoluteMonthly>",
-            "daily": "<daily>",
-            "relativeMonthly": "<relativeMonthly>",
-            "weekly": {
-              "dayOfWeek": "Sunday",
-              "intervalWeeks": 1
-            }
-          },
-          "startDate": "2024-07-03",
-          "startTime": "00:00",
-          "utcOffset": "+00:00"
-        }
-      }
-    },
-    "managedIdentities": {
-      "value": {
-        "systemAssigned": true
-      }
-    }
-  }
-}
-```
-
-</details>
-<p>
-
-<details>
-
-<summary>via Bicep parameters file</summary>
-
-```bicep-params
-using 'br/public:avm/res/container-service/managed-cluster:<version>'
-
-// Required parameters
-param name = 'csauto001'
-param primaryAgentPoolProfile = [
-  {
-    availabilityZones: []
-    count: 3
-    mode: 'System'
-    name: 'systempool'
-    vmSize: 'Standard_DS2_v2'
-  }
-]
-// Non-required parameters
-param location = '<location>'
-param maintenanceConfiguration = {
-  maintenanceWindow: {
-    durationHours: 4
-    schedule: {
-      absoluteMonthly: '<absoluteMonthly>'
-      daily: '<daily>'
-      relativeMonthly: '<relativeMonthly>'
-      weekly: {
-        dayOfWeek: 'Sunday'
-        intervalWeeks: 1
-      }
-    }
-    startDate: '2024-07-03'
-    startTime: '00:00'
-    utcOffset: '+00:00'
-  }
-}
-param managedIdentities = {
-  systemAssigned: true
-}
-```
-
-</details>
-<p>
-
-### Example 2: _Using Azure CNI Network Plugin._
+### Example 1: _Using Azure CNI Network Plugin._
 
 This instance deploys the module with Azure CNI network plugin .
 
@@ -916,7 +758,7 @@ param tags = {
 </details>
 <p>
 
-### Example 3: _Using only defaults_
+### Example 2: _Using only defaults_
 
 This instance deploys the module with the minimum set of required parameters.
 
@@ -1020,7 +862,7 @@ param managedIdentities = {
 </details>
 <p>
 
-### Example 4: _Using Kubenet Network Plugin._
+### Example 3: _Using Kubenet Network Plugin._
 
 This instance deploys the module with Kubenet network plugin .
 
@@ -1419,7 +1261,7 @@ param tags = {
 </details>
 <p>
 
-### Example 5: _Using Private Cluster._
+### Example 4: _Using Private Cluster._
 
 This instance deploys the module with a private cluster instance.
 
@@ -1729,7 +1571,7 @@ param skuTier = 'Standard'
 </details>
 <p>
 
-### Example 6: _WAF-aligned_
+### Example 5: _WAF-aligned_
 
 This instance deploys the module in alignment with the best-practices of the Well-Architected Framework.
 
@@ -1847,20 +1689,38 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
     enableKeyvaultSecretsProvider: true
     enablePrivateCluster: true
     location: '<location>'
-    maintenanceConfiguration: {
-      maintenanceWindow: {
-        durationHours: 4
-        schedule: {
-          weekly: {
-            dayOfWeek: 'Sunday'
-            intervalWeeks: 1
+    maintenanceConfigurations: [
+      {
+        maintenanceWindow: {
+          durationHours: 4
+          schedule: {
+            weekly: {
+              dayOfWeek: 'Sunday'
+              intervalWeeks: 1
+            }
           }
+          startDate: '2024-07-15'
+          startTime: '00:00'
+          utcOffset: '+00:00'
         }
-        startDate: '2024-07-15'
-        startTime: '00:00'
-        utcOffset: '+00:00'
+        name: 'aksManagedAutoUpgradeSchedule'
       }
-    }
+      {
+        maintenanceWindow: {
+          durationHours: 4
+          schedule: {
+            weekly: {
+              dayOfWeek: 'Sunday'
+              intervalWeeks: 1
+            }
+          }
+          startDate: '2024-07-15'
+          startTime: '00:00'
+          utcOffset: '+00:00'
+        }
+        name: 'aksManagedNodeOSUpgradeSchedule'
+      }
+    ]
     managedIdentities: {
       userAssignedResourcesIds: [
         '<managedIdentityResourceId>'
@@ -2021,21 +1881,39 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
     "location": {
       "value": "<location>"
     },
-    "maintenanceConfiguration": {
-      "value": {
-        "maintenanceWindow": {
-          "durationHours": 4,
-          "schedule": {
-            "weekly": {
-              "dayOfWeek": "Sunday",
-              "intervalWeeks": 1
-            }
+    "maintenanceConfigurations": {
+      "value": [
+        {
+          "maintenanceWindow": {
+            "durationHours": 4,
+            "schedule": {
+              "weekly": {
+                "dayOfWeek": "Sunday",
+                "intervalWeeks": 1
+              }
+            },
+            "startDate": "2024-07-15",
+            "startTime": "00:00",
+            "utcOffset": "+00:00"
           },
-          "startDate": "2024-07-15",
-          "startTime": "00:00",
-          "utcOffset": "+00:00"
+          "name": "aksManagedAutoUpgradeSchedule"
+        },
+        {
+          "maintenanceWindow": {
+            "durationHours": 4,
+            "schedule": {
+              "weekly": {
+                "dayOfWeek": "Sunday",
+                "intervalWeeks": 1
+              }
+            },
+            "startDate": "2024-07-15",
+            "startTime": "00:00",
+            "utcOffset": "+00:00"
+          },
+          "name": "aksManagedNodeOSUpgradeSchedule"
         }
-      }
+      ]
     },
     "managedIdentities": {
       "value": {
@@ -2191,20 +2069,38 @@ param enableAzureDefender = true
 param enableKeyvaultSecretsProvider = true
 param enablePrivateCluster = true
 param location = '<location>'
-param maintenanceConfiguration = {
-  maintenanceWindow: {
-    durationHours: 4
-    schedule: {
-      weekly: {
-        dayOfWeek: 'Sunday'
-        intervalWeeks: 1
+param maintenanceConfigurations = [
+  {
+    maintenanceWindow: {
+      durationHours: 4
+      schedule: {
+        weekly: {
+          dayOfWeek: 'Sunday'
+          intervalWeeks: 1
+        }
       }
+      startDate: '2024-07-15'
+      startTime: '00:00'
+      utcOffset: '+00:00'
     }
-    startDate: '2024-07-15'
-    startTime: '00:00'
-    utcOffset: '+00:00'
+    name: 'aksManagedAutoUpgradeSchedule'
   }
-}
+  {
+    maintenanceWindow: {
+      durationHours: 4
+      schedule: {
+        weekly: {
+          dayOfWeek: 'Sunday'
+          intervalWeeks: 1
+        }
+      }
+      startDate: '2024-07-15'
+      startTime: '00:00'
+      utcOffset: '+00:00'
+    }
+    name: 'aksManagedNodeOSUpgradeSchedule'
+  }
+]
 param managedIdentities = {
   userAssignedResourcesIds: [
     '<managedIdentityResourceId>'
@@ -2320,7 +2216,7 @@ param tags = {
 | [`loadBalancerSku`](#parameter-loadbalancersku) | string | Specifies the sku of the load balancer used by the virtual machine scale sets used by nodepools. |
 | [`location`](#parameter-location) | string | Specifies the location of AKS cluster. It picks up Resource Group's location by default. |
 | [`lock`](#parameter-lock) | object | The lock settings of the service. |
-| [`maintenanceConfiguration`](#parameter-maintenanceconfiguration) | object | Whether or not to use AKS Automatic mode. |
+| [`maintenanceConfigurations`](#parameter-maintenanceconfigurations) | array | Whether or not to use AKS Automatic mode. |
 | [`managedIdentities`](#parameter-managedidentities) | object | The managed identity definition for this resource. Only one type of identity is supported: system-assigned or user-assigned, but not both. Default is system-assigned. |
 | [`managedOutboundIPCount`](#parameter-managedoutboundipcount) | int | Outbound IP Count for the Load balancer. |
 | [`metricAnnotationsAllowList`](#parameter-metricannotationsallowlist) | string | A comma-separated list of Kubernetes cluster metrics annotations. |
@@ -3643,25 +3539,46 @@ Specify the name of lock.
 - Required: No
 - Type: string
 
-### Parameter: `maintenanceConfiguration`
+### Parameter: `maintenanceConfigurations`
 
 Whether or not to use AKS Automatic mode.
 
 - Required: No
-- Type: object
+- Type: array
 
 **Required parameters**
 
 | Parameter | Type | Description |
 | :-- | :-- | :-- |
-| [`maintenanceWindow`](#parameter-maintenanceconfigurationmaintenancewindow) | object | Maintenance window for the maintenance configuration. |
+| [`maintenanceWindow`](#parameter-maintenanceconfigurationsmaintenancewindow) | object | Maintenance window for the maintenance configuration. |
 
-### Parameter: `maintenanceConfiguration.maintenanceWindow`
+**Optional parameters**
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| [`name`](#parameter-maintenanceconfigurationsname) | string | Name for the maintenance configuration. |
+
+### Parameter: `maintenanceConfigurations.maintenanceWindow`
 
 Maintenance window for the maintenance configuration.
 
 - Required: Yes
 - Type: object
+
+### Parameter: `maintenanceConfigurations.name`
+
+Name for the maintenance configuration.
+
+- Required: Yes
+- Type: string
+- Allowed:
+  ```Bicep
+  [
+    'aksManagedAutoUpgradeSchedule'
+    'aksManagedNodeOSUpgradeSchedule'
+    'default'
+  ]
+  ```
 
 ### Parameter: `managedIdentities`
 
