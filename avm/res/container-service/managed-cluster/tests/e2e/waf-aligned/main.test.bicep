@@ -150,7 +150,6 @@ module testDeployment '../../../main.bicep' = [
       disableLocalAccounts: true
       enableAzureDefender: true
       maintenanceConfiguration: {
-        name: 'aksManagedAutoUpgradeSchedule'
         maintenanceWindow: {
           schedule: {
             weekly: {
