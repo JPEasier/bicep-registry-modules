@@ -138,16 +138,32 @@ module testDeployment '../../../main.bicep' = [
           vmSize: 'Standard_DS2_v2'
         }
       ]
-      autoUpgradeProfileUpgradeChannel: 'stable'
+      autoUpgradeProfileUpgradeChannel: 'node-image'
       networkPlugin: 'azure'
       networkPolicy: 'azure'
       skuTier: 'Standard'
       dnsServiceIP: '10.10.200.10'
       serviceCidr: '10.10.200.0/24'
+      enableKeyvaultSecretsProvider: true
       omsAgentEnabled: true
       monitoringWorkspaceId: diagnosticDependencies.outputs.logAnalyticsWorkspaceResourceId
       disableLocalAccounts: true
       enableAzureDefender: true
+      maintenanceConfiguration: {
+        name: 'aksManagedAutoUpgradeSchedule'
+        maintenanceWindow: {
+          schedule: {
+            weekly: {
+              intervalWeeks: 1
+              dayOfWeek: 'Sunday'
+            }
+          }
+          durationHours: 4
+          utcOffset: '+00:00'
+          startDate: '2024-07-15'
+          startTime: '00:00'
+        }
+      }
       diagnosticSettings: [
         {
           name: 'customSetting'
