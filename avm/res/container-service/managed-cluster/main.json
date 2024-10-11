@@ -5,8 +5,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.29.47.4906",
-      "templateHash": "6707709888421096485"
+      "version": "0.30.23.60470",
+      "templateHash": "9013781110772967884"
     },
     "name": "Azure Kubernetes Service (AKS) Managed Clusters",
     "description": "This module deploys an Azure Kubernetes Service (AKS) Managed Cluster.",
@@ -20,7 +20,6 @@
         "properties": {
           "name": {
             "type": "string",
-            "nullable": true,
             "metadata": {
               "description": "Required. The name of the agent pool."
             }
@@ -30,9 +29,8 @@
             "items": {
               "type": "string"
             },
-            "nullable": true,
             "metadata": {
-              "description": "Optional. The availability zones of the agent pool."
+              "description": "Required. The availability zones of the agent pool."
             }
           },
           "count": {
@@ -339,8 +337,7 @@
             "description": "Optional. The resource ID(s) to assign to the resource."
           }
         }
-      },
-      "nullable": true
+      }
     },
     "lockType": {
       "type": "object",
@@ -706,8 +703,11 @@
     },
     "managedIdentities": {
       "$ref": "#/definitions/managedIdentitiesType",
+      "defaultValue": {
+        "systemAssigned": true
+      },
       "metadata": {
-        "description": "Optional. The managed identity definition for this resource. Only one type of identity is supported: system-assigned or user-assigned, but not both."
+        "description": "Optional. The managed identity definition for this resource. Only one type of identity is supported: system-assigned or user-assigned, but not both. Default is system-assigned."
       }
     },
     "networkDataplane": {
@@ -914,9 +914,9 @@
     },
     "disableLocalAccounts": {
       "type": "bool",
-      "defaultValue": false,
+      "defaultValue": true,
       "metadata": {
-        "description": "Optional. If set to true, getting static credentials will be disabled for this cluster. This must only be used on Managed Clusters that are AAD enabled."
+        "description": "Optional. If set to true, getting static credentials will be disabled for this cluster. This must only be used on Managed Clusters that are AAD enabled. Default is true."
       }
     },
     "nodeResourceGroup": {
@@ -1841,8 +1841,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.29.47.4906",
-              "templateHash": "12168542117744033419"
+              "version": "0.30.23.60470",
+              "templateHash": "2505380725266419010"
             },
             "name": "Azure Kubernetes Service (AKS) Managed Cluster Maintenance Configurations",
             "description": "This module deploys an Azure Kubernetes Service (AKS) Managed Cluster Maintenance Configurations.",
@@ -2038,8 +2038,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.29.47.4906",
-              "templateHash": "2004205618690542488"
+              "version": "0.30.23.60470",
+              "templateHash": "14373599778221078156"
             },
             "name": "Azure Kubernetes Service (AKS) Managed Cluster Agent Pools",
             "description": "This module deploys an Azure Kubernetes Service (AKS) Managed Cluster Agent Pool.",
@@ -2342,7 +2342,7 @@
             },
             "agentPool": {
               "type": "Microsoft.ContainerService/managedClusters/agentPools",
-              "apiVersion": "2023-07-02-preview",
+              "apiVersion": "2024-03-02-preview",
               "name": "[format('{0}/{1}', parameters('managedClusterName'), parameters('name'))]",
               "properties": {
                 "availabilityZones": "[parameters('availabilityZones')]",

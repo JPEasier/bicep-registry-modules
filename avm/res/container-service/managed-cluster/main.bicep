@@ -11,8 +11,10 @@ param location string = resourceGroup().location
 @description('Optional. Specifies the DNS prefix specified when creating the managed cluster.')
 param dnsPrefix string = name
 
-@description('Optional. The managed identity definition for this resource. Only one type of identity is supported: system-assigned or user-assigned, but not both.')
-param managedIdentities managedIdentitiesType
+@description('Optional. The managed identity definition for this resource. Only one type of identity is supported: system-assigned or user-assigned, but not both. Default is system-assigned.')
+param managedIdentities managedIdentitiesType = {
+  systemAssigned: true
+}
 
 @description('Optional. Network dataplane used in the Kubernetes cluster. Not compatible with kubenet network plugin.')
 @allowed([
@@ -121,8 +123,8 @@ param enableRBAC bool = true
 @description('Optional. Specifies whether to enable Azure RBAC for Kubernetes authorization.')
 param aadProfileEnableAzureRBAC bool = enableRBAC
 
-@description('Optional. If set to true, getting static credentials will be disabled for this cluster. This must only be used on Managed Clusters that are AAD enabled.')
-param disableLocalAccounts bool = false
+@description('Optional. If set to true, getting static credentials will be disabled for this cluster. This must only be used on Managed Clusters that are AAD enabled. Default is true.')
+param disableLocalAccounts bool = true
 
 @description('Optional. Name of the resource group containing agent pool nodes.')
 param nodeResourceGroup string = '${resourceGroup().name}_aks_${name}_nodes'
@@ -959,10 +961,10 @@ output webAppRoutingIdentityObjectId string = managedCluster.properties.?ingress
 
 type agentPoolType = {
   @description('Required. The name of the agent pool.')
-  name: string?
+  name: string
 
-  @description('Optional. The availability zones of the agent pool.')
-  availabilityZones: string[]?
+  @description('Required. The availability zones of the agent pool.')
+  availabilityZones: string[]
 
   @description('Optional. The number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive).')
   count: int?
@@ -1076,7 +1078,7 @@ type managedIdentitiesType = {
 
   @description('Optional. The resource ID(s) to assign to the resource.')
   userAssignedResourcesIds: string[]?
-}?
+}
 
 type lockType = {
   @description('Optional. Specify the name of lock.')

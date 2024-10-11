@@ -18,7 +18,7 @@ This module deploys an Azure Kubernetes Service (AKS) Managed Cluster.
 | `Microsoft.Authorization/locks` | [2020-05-01](https://learn.microsoft.com/en-us/azure/templates/Microsoft.Authorization/2020-05-01/locks) |
 | `Microsoft.Authorization/roleAssignments` | [2022-04-01](https://learn.microsoft.com/en-us/azure/templates/Microsoft.Authorization/2022-04-01/roleAssignments) |
 | `Microsoft.ContainerService/managedClusters` | [2024-03-02-preview](https://learn.microsoft.com/en-us/azure/templates/Microsoft.ContainerService/2024-03-02-preview/managedClusters) |
-| `Microsoft.ContainerService/managedClusters/agentPools` | [2023-07-02-preview](https://learn.microsoft.com/en-us/azure/templates/Microsoft.ContainerService/2023-07-02-preview/managedClusters/agentPools) |
+| `Microsoft.ContainerService/managedClusters/agentPools` | [2024-03-02-preview](https://learn.microsoft.com/en-us/azure/templates/Microsoft.ContainerService/2024-03-02-preview/managedClusters/agentPools) |
 | `Microsoft.ContainerService/managedClusters/maintenanceConfigurations` | [2023-10-01](https://learn.microsoft.com/en-us/azure/templates/Microsoft.ContainerService/2023-10-01/managedClusters/maintenanceConfigurations) |
 | `Microsoft.Insights/diagnosticSettings` | [2021-05-01-preview](https://learn.microsoft.com/en-us/azure/templates/Microsoft.Insights/2021-05-01-preview/diagnosticSettings) |
 | `Microsoft.KubernetesConfiguration/extensions` | [2022-03-01](https://learn.microsoft.com/en-us/azure/templates/Microsoft.KubernetesConfiguration/2022-03-01/extensions) |
@@ -56,6 +56,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
     name: 'csauto001'
     primaryAgentPoolProfile: [
       {
+        availabilityZones: []
         count: 3
         mode: 'System'
         name: 'systempool'
@@ -107,6 +108,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
     "primaryAgentPoolProfile": {
       "value": [
         {
+          "availabilityZones": [],
           "count": 3,
           "mode": "System",
           "name": "systempool",
@@ -160,6 +162,7 @@ using 'br/public:avm/res/container-service/managed-cluster:<version>'
 param name = 'csauto001'
 param primaryAgentPoolProfile = [
   {
+    availabilityZones: []
     count: 3
     mode: 'System'
     name: 'systempool'
@@ -930,6 +933,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
     name: 'csmin001'
     primaryAgentPoolProfile: [
       {
+        availabilityZones: []
         count: 3
         mode: 'System'
         name: 'systempool'
@@ -964,6 +968,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
     "primaryAgentPoolProfile": {
       "value": [
         {
+          "availabilityZones": [],
           "count": 3,
           "mode": "System",
           "name": "systempool",
@@ -998,6 +1003,7 @@ using 'br/public:avm/res/container-service/managed-cluster:<version>'
 param name = 'csmin001'
 param primaryAgentPoolProfile = [
   {
+    availabilityZones: []
     count: 3
     mode: 'System'
     name: 'systempool'
@@ -2228,7 +2234,7 @@ param tags = {
 | [`customerManagedKey`](#parameter-customermanagedkey) | object | The customer managed key definition. |
 | [`diagnosticSettings`](#parameter-diagnosticsettings) | array | The diagnostic settings of the service. |
 | [`disableCustomMetrics`](#parameter-disablecustommetrics) | bool | Indicates whether custom metrics collection has to be disabled or not. If not specified the default is false. No custom metrics will be emitted if this field is false but the container insights enabled field is false. |
-| [`disableLocalAccounts`](#parameter-disablelocalaccounts) | bool | If set to true, getting static credentials will be disabled for this cluster. This must only be used on Managed Clusters that are AAD enabled. |
+| [`disableLocalAccounts`](#parameter-disablelocalaccounts) | bool | If set to true, getting static credentials will be disabled for this cluster. This must only be used on Managed Clusters that are AAD enabled. Default is true. |
 | [`disablePrometheusMetricsScraping`](#parameter-disableprometheusmetricsscraping) | bool | Indicates whether prometheus metrics scraping is disabled or not. If not specified the default is false. No prometheus metrics will be emitted if this field is false but the container insights enabled field is false. |
 | [`disableRunCommand`](#parameter-disableruncommand) | bool | Whether to disable run command for the cluster or not. |
 | [`diskEncryptionSetResourceId`](#parameter-diskencryptionsetresourceid) | string | The resource ID of the disc encryption set to apply to the cluster. For security reasons, this value should be provided. |
@@ -2266,7 +2272,7 @@ param tags = {
 | [`location`](#parameter-location) | string | Specifies the location of AKS cluster. It picks up Resource Group's location by default. |
 | [`lock`](#parameter-lock) | object | The lock settings of the service. |
 | [`maintenanceConfiguration`](#parameter-maintenanceconfiguration) | object | Whether or not to use AKS Automatic mode. |
-| [`managedIdentities`](#parameter-managedidentities) | object | The managed identity definition for this resource. Only one type of identity is supported: system-assigned or user-assigned, but not both. |
+| [`managedIdentities`](#parameter-managedidentities) | object | The managed identity definition for this resource. Only one type of identity is supported: system-assigned or user-assigned, but not both. Default is system-assigned. |
 | [`managedOutboundIPCount`](#parameter-managedoutboundipcount) | int | Outbound IP Count for the Load balancer. |
 | [`metricAnnotationsAllowList`](#parameter-metricannotationsallowlist) | string | A comma-separated list of Kubernetes cluster metrics annotations. |
 | [`metricLabelsAllowlist`](#parameter-metriclabelsallowlist) | string | A comma-separated list of kubernetes cluster metrics labels. |
@@ -2403,13 +2409,13 @@ Define one or more secondary/additional agent pools.
 
 | Parameter | Type | Description |
 | :-- | :-- | :-- |
+| [`availabilityZones`](#parameter-agentpoolsavailabilityzones) | array | The availability zones of the agent pool. |
 | [`name`](#parameter-agentpoolsname) | string | The name of the agent pool. |
 
 **Optional parameters**
 
 | Parameter | Type | Description |
 | :-- | :-- | :-- |
-| [`availabilityZones`](#parameter-agentpoolsavailabilityzones) | array | The availability zones of the agent pool. |
 | [`count`](#parameter-agentpoolscount) | int | The number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). |
 | [`enableAutoScaling`](#parameter-agentpoolsenableautoscaling) | bool | Whether to enable auto-scaling for the agent pool. |
 | [`enableDefaultTelemetry`](#parameter-agentpoolsenabledefaulttelemetry) | bool | The enable default telemetry of the agent pool. |
@@ -2446,19 +2452,19 @@ Define one or more secondary/additional agent pools.
 | [`vnetSubnetID`](#parameter-agentpoolsvnetsubnetid) | string | The VNet subnet ID of the agent pool. |
 | [`workloadRuntime`](#parameter-agentpoolsworkloadruntime) | string | The workload runtime of the agent pool. |
 
-### Parameter: `agentPools.name`
-
-The name of the agent pool.
-
-- Required: No
-- Type: string
-
 ### Parameter: `agentPools.availabilityZones`
 
 The availability zones of the agent pool.
 
-- Required: No
+- Required: Yes
 - Type: array
+
+### Parameter: `agentPools.name`
+
+The name of the agent pool.
+
+- Required: Yes
+- Type: string
 
 ### Parameter: `agentPools.count`
 
@@ -3179,11 +3185,11 @@ Indicates whether custom metrics collection has to be disabled or not. If not sp
 
 ### Parameter: `disableLocalAccounts`
 
-If set to true, getting static credentials will be disabled for this cluster. This must only be used on Managed Clusters that are AAD enabled.
+If set to true, getting static credentials will be disabled for this cluster. This must only be used on Managed Clusters that are AAD enabled. Default is true.
 
 - Required: No
 - Type: bool
-- Default: `False`
+- Default: `True`
 
 ### Parameter: `disablePrometheusMetricsScraping`
 
@@ -3610,10 +3616,16 @@ Maintenance window for the maintenance configuration.
 
 ### Parameter: `managedIdentities`
 
-The managed identity definition for this resource. Only one type of identity is supported: system-assigned or user-assigned, but not both.
+The managed identity definition for this resource. Only one type of identity is supported: system-assigned or user-assigned, but not both. Default is system-assigned.
 
 - Required: No
 - Type: object
+- Default:
+  ```Bicep
+  {
+      systemAssigned: true
+  }
+  ```
 
 **Optional parameters**
 
