@@ -598,6 +598,7 @@ resource managedCluster 'Microsoft.ContainerService/managedClusters@2024-03-02-p
       orchestratorVersion: profile.?orchestratorVersion
       osDiskSizeGB: profile.?osDiskSizeGB
       osDiskType: profile.?osDiskType
+      osSKU: profile.?osSKU
       osType: profile.?osType ?? 'Linux'
       #disable-next-line use-resource-id-functions // Not possible to reference as nested
       podSubnetID: profile.?podSubnetResourceId
@@ -913,7 +914,7 @@ module managedCluster_agentPools 'agent-pool/main.bicep' = [
       orchestratorVersion: agentPool.?orchestratorVersion ?? kubernetesVersion
       osDiskSizeGB: agentPool.?osDiskSizeGB
       osDiskType: agentPool.?osDiskType
-      osSku: agentPool.?osSku
+      osSKU: agentPool.?osSKU
       osType: agentPool.?osType
       podSubnetResourceId: agentPool.?podSubnetResourceId
       proximityPlacementGroupResourceId: agentPool.?proximityPlacementGroupResourceId
@@ -1147,8 +1148,8 @@ type agentPoolType = {
   @description('Optional. The OS disk type of the agent pool.')
   osDiskType: string?
 
-  @description('Optional. The OS SKU of the agent pool.')
-  osSku: string?
+  @description('Optional. Specifies the OS SKU used by the agent pool. The default is Ubuntu if OSType is Linux. The default is Windows2019 when Kubernetes <= 1.24 or Windows2022 when Kubernetes >= 1.25 if OSType is Windows.')
+  osSKU: ('AzureLinux' | 'CBLMariner' | 'Mariner' | 'Ubuntu' | 'Windows2019' | 'Windows2022' | 'WindowsAnnual')?
 
   @description('Optional. The OS type of the agent pool.')
   osType: ('Linux' | 'Windows')?

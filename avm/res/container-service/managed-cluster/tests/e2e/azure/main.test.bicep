@@ -93,6 +93,7 @@ module testDeployment '../../../main.bicep' = [
           ]
           osDiskSizeGB: 0
           osType: 'Linux'
+          osSKU: 'AzureLinux'
           type: 'VirtualMachineScaleSets'
           vmSize: 'Standard_DS2_v2'
           vnetSubnetResourceId: nestedDependencies.outputs.subnetResourceIds[0]
