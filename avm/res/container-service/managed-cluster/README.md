@@ -311,6 +311,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
           'CriticalAddonsOnly=true:NoSchedule'
         ]
         osDiskSizeGB: 0
+        osSKU: 'AzureLinux'
         osType: 'Linux'
         type: 'VirtualMachineScaleSets'
         vmSize: 'Standard_DS2_v2'
@@ -567,6 +568,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
             "CriticalAddonsOnly=true:NoSchedule"
           ],
           "osDiskSizeGB": 0,
+          "osSKU": "AzureLinux",
           "osType": "Linux",
           "type": "VirtualMachineScaleSets",
           "vmSize": "Standard_DS2_v2",
@@ -879,6 +881,7 @@ param primaryAgentPoolProfiles = [
       'CriticalAddonsOnly=true:NoSchedule'
     ]
     osDiskSizeGB: 0
+    osSKU: 'AzureLinux'
     osType: 'Linux'
     type: 'VirtualMachineScaleSets'
     vmSize: 'Standard_DS2_v2'
@@ -2799,7 +2802,7 @@ Properties of the primary agent pool.
 | [`orchestratorVersion`](#parameter-primaryagentpoolprofilesorchestratorversion) | string | The Kubernetes version of the agent pool. |
 | [`osDiskSizeGB`](#parameter-primaryagentpoolprofilesosdisksizegb) | int | The OS disk size in GB of the agent pool. |
 | [`osDiskType`](#parameter-primaryagentpoolprofilesosdisktype) | string | The OS disk type of the agent pool. |
-| [`osSku`](#parameter-primaryagentpoolprofilesossku) | string | The OS SKU of the agent pool. |
+| [`osSKU`](#parameter-primaryagentpoolprofilesossku) | string | Specifies the OS SKU used by the agent pool. The default is Ubuntu if OSType is Linux. The default is Windows2019 when Kubernetes <= 1.24 or Windows2022 when Kubernetes >= 1.25 if OSType is Windows. |
 | [`osType`](#parameter-primaryagentpoolprofilesostype) | string | The OS type of the agent pool. |
 | [`podSubnetResourceId`](#parameter-primaryagentpoolprofilespodsubnetresourceid) | string | The pod subnet ID of the agent pool. |
 | [`proximityPlacementGroupResourceId`](#parameter-primaryagentpoolprofilesproximityplacementgroupresourceid) | string | The proximity placement group resource ID of the agent pool. |
@@ -2992,12 +2995,24 @@ The OS disk type of the agent pool.
 - Required: No
 - Type: string
 
-### Parameter: `primaryAgentPoolProfiles.osSku`
+### Parameter: `primaryAgentPoolProfiles.osSKU`
 
-The OS SKU of the agent pool.
+Specifies the OS SKU used by the agent pool. The default is Ubuntu if OSType is Linux. The default is Windows2019 when Kubernetes <= 1.24 or Windows2022 when Kubernetes >= 1.25 if OSType is Windows.
 
 - Required: No
 - Type: string
+- Allowed:
+  ```Bicep
+  [
+    'AzureLinux'
+    'CBLMariner'
+    'Mariner'
+    'Ubuntu'
+    'Windows2019'
+    'Windows2022'
+    'WindowsAnnual'
+  ]
+  ```
 
 ### Parameter: `primaryAgentPoolProfiles.osType`
 
@@ -3247,7 +3262,7 @@ Define one or more secondary/additional agent pools.
 | [`orchestratorVersion`](#parameter-agentpoolsorchestratorversion) | string | The Kubernetes version of the agent pool. |
 | [`osDiskSizeGB`](#parameter-agentpoolsosdisksizegb) | int | The OS disk size in GB of the agent pool. |
 | [`osDiskType`](#parameter-agentpoolsosdisktype) | string | The OS disk type of the agent pool. |
-| [`osSku`](#parameter-agentpoolsossku) | string | The OS SKU of the agent pool. |
+| [`osSKU`](#parameter-agentpoolsossku) | string | Specifies the OS SKU used by the agent pool. The default is Ubuntu if OSType is Linux. The default is Windows2019 when Kubernetes <= 1.24 or Windows2022 when Kubernetes >= 1.25 if OSType is Windows. |
 | [`osType`](#parameter-agentpoolsostype) | string | The OS type of the agent pool. |
 | [`podSubnetResourceId`](#parameter-agentpoolspodsubnetresourceid) | string | The pod subnet ID of the agent pool. |
 | [`proximityPlacementGroupResourceId`](#parameter-agentpoolsproximityplacementgroupresourceid) | string | The proximity placement group resource ID of the agent pool. |
@@ -3440,12 +3455,24 @@ The OS disk type of the agent pool.
 - Required: No
 - Type: string
 
-### Parameter: `agentPools.osSku`
+### Parameter: `agentPools.osSKU`
 
-The OS SKU of the agent pool.
+Specifies the OS SKU used by the agent pool. The default is Ubuntu if OSType is Linux. The default is Windows2019 when Kubernetes <= 1.24 or Windows2022 when Kubernetes >= 1.25 if OSType is Windows.
 
 - Required: No
 - Type: string
+- Allowed:
+  ```Bicep
+  [
+    'AzureLinux'
+    'CBLMariner'
+    'Mariner'
+    'Ubuntu'
+    'Windows2019'
+    'Windows2022'
+    'WindowsAnnual'
+  ]
+  ```
 
 ### Parameter: `agentPools.osType`
 
