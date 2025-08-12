@@ -26,8 +26,8 @@ param deploymentOperations string[] = ['Validate', 'Deploy']
 @description('Optional. Enable/Disable usage telemetry for module.')
 param enableTelemetry bool = true
 
-@description('Optional. The deployment settings of the cluster.')
-param deploymentSettings deploymentSettingsType?
+@description('Required. The deployment settings of the cluster.')
+param deploymentSettings deploymentSettingsType
 
 import { roleAssignmentType } from 'br/public:avm/utl/types/avm-common-types:0.5.1'
 @description('Optional. Array of role assignments to create.')
@@ -92,6 +92,10 @@ param witnessStorageAccountSubscriptionId string?
 
 @description('Optional. Storage account resource group, which is used as the witness for the HCI Windows Failover Cluster.')
 param witnessStorageAccountResourceGroup string?
+
+@description('Required. The service principal object ID of the Azure Stack HCI Resource Provider in this tenant. Can be fetched via `Get-AzADServicePrincipal -ApplicationId 1412d89f-b8a8-4111-b4fd-e82905cbd85d` after the \'Microsoft.AzureStackHCI\' provider was registered in the subscription.')
+@secure()
+param hciResourceProviderObjectId string
 
 // ============= //
 //   Variables   //
@@ -197,6 +201,8 @@ module secrets './secrets.bicep' = if (useSharedKeyVault) {
     defaultARBApplicationTags: defaultARBApplicationTags
     witnessStorageAccountResourceGroup: witnessStorageAccountResourceGroup ?? resourceGroup().name
     witnessStorageAccountSubscriptionId: witnessStorageAccountSubscriptionId ?? subscription().subscriptionId
+    hciResourceProviderObjectId: hciResourceProviderObjectId
+    clusterNodeNames: deploymentSettings!.clusterNodeNames
   }
 }
 
@@ -218,7 +224,16 @@ module deploymentSetting 'deployment-setting/main.bicep' = [
       domainOUPath: deploymentSettings!.domainOUPath
       endingIPAddress: deploymentSettings!.endingIPAddress
       keyVaultName: deploymentSettings!.keyVaultName
-      networkIntents: deploymentSettings!.networkIntents
+      networkIntents: [
+        for intent in deploymentSettings.networkIntents: {
+          ...intent
+          qosPolicyOverrides: {
+            bandwidthPercentage_SMB: intent.qosPolicyOverrides.bandwidthPercentageSMB
+            priorityValue8021Action_Cluster: intent.qosPolicyOverrides.priorityValue8021ActionCluster
+            priorityValue8021Action_SMB: intent.qosPolicyOverrides.priorityValue8021ActionSMB
+          }
+        }
+      ]
       startingIPAddress: deploymentSettings!.startingIPAddress
       storageConnectivitySwitchless: deploymentSettings!.storageConnectivitySwitchless
       storageNetworks: deploymentSettings!.storageNetworks
@@ -231,13 +246,14 @@ module deploymentSetting 'deployment-setting/main.bicep' = [
       enableStorageAutoIp: deploymentSettings!.?enableStorageAutoIp
       episodicDataUpload: deploymentSettings!.?episodicDataUpload
       hvciProtection: deploymentSettings!.?hvciProtection
-      isEuropeanUnionLocation: deploymentSettings!.?isRFEuropeanUnionLocation
+      isEuropeanUnionLocation: deploymentSettings!.?isEuropeanUnionLocation
       sideChannelMitigationEnforced: deploymentSettings!.?sideChannelMitigationEnforced
       smbClusterEncryption: deploymentSettings!.?smbClusterEncryption
       smbSigningEnforced: deploymentSettings!.?smbSigningEnforced
       storageConfigurationMode: deploymentSettings!.?storageConfigurationMode
       streamingDataClient: deploymentSettings!.?streamingDataClient
       wdacEnforced: deploymentSettings!.?wdacEnforced
+      hciResourceProviderObjectId: hciResourceProviderObjectId
     }
   }
 ]
@@ -258,6 +274,9 @@ resource cluster_roleAssignments 'Microsoft.Authorization/roleAssignments@2022-0
   }
 ]
 
+var managementNetworks = filter(deploymentSettings.networkIntents, n => contains(n.trafficType, 'Management'))
+var managementIntentName = length(managementNetworks) > 0 ? managementNetworks[0].name : ''
+
 @description('The name of the cluster.')
 output name string = cluster.name
 
@@ -272,6 +291,9 @@ output systemAssignedMIPrincipalId string = cluster.identity.principalId
 
 @description('The location of the cluster.')
 output location string = cluster.location
+
+@description('The name of the vSwitch.')
+output vSwitchName string = 'ConvergedSwitch(${managementIntentName})'
 
 // =============== //
 //   Definitions   //
@@ -306,13 +328,13 @@ type networkIntentType = {
   @description('Required. The qosPolicy overrides for the network intent.')
   qosPolicyOverrides: {
     @description('Required. The bandwidthPercentage for the network intent. Recommend 50.')
-    bandwidthPercentage_SMB: string
+    bandwidthPercentageSMB: string
 
     @description('Required. Recommend 7.')
-    priorityValue8021Action_Cluster: string
+    priorityValue8021ActionCluster: string
 
     @description('Required. Recommend 3.')
-    priorityValue8021Action_SMB: string
+    priorityValue8021ActionSMB: string
   }
 
   @description('Required. Specify whether to override the virtualSwitchConfiguration property. Use false by default.')
@@ -347,8 +369,8 @@ type storageAdapterIPInfoType = {
 // define custom type for storage network objects
 @export()
 type storageNetworksType = {
-  @description('Optional. The name of the storage network.')
-  name: string?
+  @description('Required. The name of the storage network.')
+  name: string
 
   @description('Required. The name of the storage adapter.')
   adapterName: string
