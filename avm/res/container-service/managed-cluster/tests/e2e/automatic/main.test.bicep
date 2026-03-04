@@ -60,17 +60,14 @@ module testDeployment '../../../main.bicep' = [
           name: 'aksManagedAutoUpgradeSchedule'
           maintenanceWindow: {
             schedule: {
-              daily: null
               weekly: {
                 intervalWeeks: 1
                 dayOfWeek: 'Sunday'
               }
-              absoluteMonthly: null
-              relativeMonthly: null
             }
             durationHours: 4
             utcOffset: '+00:00'
-            startDate: '2024-07-03'
+            startDate: '2026-07-03'
             startTime: '00:00'
           }
         }

@@ -20,7 +20,7 @@ resource managedCluster 'Microsoft.ContainerService/managedClusters@2025-10-01' 
   name: managedClusterName
 }
 
-resource aksManagedAutoUpgradeSchedule 'Microsoft.ContainerService/managedClusters/maintenanceConfigurations@2025-10-01' = {
+resource maintenanceConfiguration 'Microsoft.ContainerService/managedClusters/maintenanceConfigurations@2025-10-01' = {
   name: name
   parent: managedCluster
   properties: {
@@ -31,10 +31,10 @@ resource aksManagedAutoUpgradeSchedule 'Microsoft.ContainerService/managedCluste
 }
 
 @description('The name of the maintenance configuration.')
-output name string = aksManagedAutoUpgradeSchedule.name
+output name string = maintenanceConfiguration.name
 
 @description('The resource ID of the maintenance configuration.')
-output resourceId string = aksManagedAutoUpgradeSchedule.id
+output resourceId string = maintenanceConfiguration.id
 
-@description('The resource group the agent pool was deployed into.')
+@description('The resource group the maintenance configuration was deployed into.')
 output resourceGroupName string = resourceGroup().name

@@ -105,16 +105,10 @@ module testDeployment '../../../main.bicep' = [
           maxCount: 3
           maxPods: 50
           minCount: 3
-          minPods: 2
           mode: 'User'
           name: 'userpool1'
-          nodeLabels: {}
           osDiskType: 'Ephemeral'
           osDiskSizeGB: 60
-          osType: 'Linux'
-          scaleSetEvictionPolicy: 'Delete'
-          scaleSetPriority: 'Regular'
-          type: 'VirtualMachineScaleSets'
           vmSize: 'Standard_DS4_v2'
           vnetSubnetResourceId: '${nestedDependencies.outputs.vNetResourceId}/subnets/defaultSubnet'
         }
@@ -151,7 +145,7 @@ module testDeployment '../../../main.bicep' = [
             }
             durationHours: 4
             utcOffset: '+00:00'
-            startDate: '2024-07-15'
+            startDate: '2026-07-15'
             startTime: '00:00'
           }
         }
@@ -166,7 +160,7 @@ module testDeployment '../../../main.bicep' = [
             }
             durationHours: 4
             utcOffset: '+00:00'
-            startDate: '2024-07-15'
+            startDate: '2026-07-15'
             startTime: '00:00'
           }
         }

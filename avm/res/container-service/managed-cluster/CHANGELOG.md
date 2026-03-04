@@ -7,6 +7,17 @@ The latest version of the changelog can be found [here](https://github.com/Azure
 ### Changes
 
 - update API versions to `2025-10-01` in main module and child modules
+- fix: Fixed wrong RBAC role on `privateDnsZone_roleAssignment` — was using DNS Zone Contributor (`befefa01...`) instead of Private DNS Zone Contributor (`b12aa53e...`).
+- cleanup: Removed dead `minPods` property from `agentPoolType` (not a valid AKS API property, was never mapped to the resource).
+- cleanup: Removed dead `enableDefaultTelemetry` property from `agentPoolType` (legacy AVM v0, never passed to child module).
+- fix: Fixed spelling mistakes in parameter descriptions (`assing` → `assigning`, `the The` → `the`, `mainenance` → `maintenance`).
+- fix: Fixed typos in comments (`condtion` → `condition`, `dummmyZone` → `dummyZone`).
+- fix: Fixed copy-paste error in `maintenance-configurations` output description (`agent pool` → `maintenance configuration`).
+- fix: Fixed misleading symbolic name `aksManagedAutoUpgradeSchedule` → `maintenanceConfiguration` in maintenance-configurations child module.
+- fix: Fixed `configurationProtectedSettings` in `extensionType` to reference `extensions` resource type instead of `fluxConfigurations`.
+- cleanup: Removed dead/default-value parameters from test files (`minPods`, `nodeLabels: {}`, `nodeTaints: []`, explicit `null` values).
+- fix: Updated expired `upgradeSettings.overrideSettings.until` date in max test from `2025-12-31` to `2027-12-31`.
+- fix: Updated stale maintenance window `startDate` values from `2024-07-*` to `2026-07-*` across tests.
 
 ### Bug Fixes
 
@@ -17,7 +28,7 @@ The latest version of the changelog can be found [here](https://github.com/Azure
 - **Node drain timeout** ([#6612](https://github.com/Azure/bicep-registry-modules/issues/6612)): The `drainTimeoutInMinutes` setting is already available via the `upgradeSettings` property on both `primaryAgentPoolProfiles` and `agentPools`. No additional parameter is needed.
 - **Dual-stack support** ([#3594](https://github.com/Azure/bicep-registry-modules/issues/3594)): Parameters `ipFamilies`, `serviceCidrs`, and `podCidrs` were added in v0.12.0 and fully support dual-stack networking.
 - **Prometheus monitoring** ([#4466](https://github.com/Azure/bicep-registry-modules/issues/4466)): The `azureMonitorProfile` parameter is a full pass-through from the API schema. Data Collection Rules (DCR) and Data Collection Rule Associations (DCRA) are separate Azure resources and must be created outside of this module.
-- **Container Insights logging profile** ([#6065](https://github.com/Azure/bicep-registry-modules/issues/6065)): Container Insights log collection settings can be configured via the `azureMonitorProfile` parameter, which accepts the full API schema for `Microsoft.ContainerService/managedClusters@2025-09-01`.
+- **Container Insights logging profile** ([#6065](https://github.com/Azure/bicep-registry-modules/issues/6065)): Container Insights log collection settings can be configured via the `azureMonitorProfile` parameter, which accepts the full API schema for `Microsoft.ContainerService/managedClusters@2025-10-01`.
 - **Migration from v0.1.x to v0.8+** ([#4479](https://github.com/Azure/bicep-registry-modules/issues/4479)): Breaking changes were documented in the v0.12.0 changelog. Users upgrading from older versions should review the breaking changes section carefully.
 
 ### Breaking Changes

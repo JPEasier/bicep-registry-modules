@@ -150,7 +150,7 @@ param dnsZoneResourceId string?
 @description('Optional. Ingress type for the default NginxIngressController custom resource. It will be ignored if `webApplicationRoutingEnabled` is set to `false`.')
 param defaultIngressControllerType resourceInput<'Microsoft.ContainerService/managedClusters@2025-10-01'>.properties.ingressProfile.webAppRouting.nginx.defaultIngressControllerType?
 
-@description('Optional. Specifies whether assing the DNS zone contributor role to the cluster service principal. It will be ignored if `webApplicationRoutingEnabled` is set to `false` or `dnsZoneResourceId` not provided.')
+@description('Optional. Specifies whether assigning the DNS zone contributor role to the cluster service principal. It will be ignored if `webApplicationRoutingEnabled` is set to `false` or `dnsZoneResourceId` not provided.')
 param enableDnsZoneContributorRoleAssignment bool = true
 
 @description('Optional. Specifies whether the ingressApplicationGateway (AGIC) add-on is enabled or not.')
@@ -193,7 +193,7 @@ param autoUpgradeProfile resourceInput<'Microsoft.ContainerService/managedCluste
 @description('Optional. The pod identity profile of the Managed Cluster. See [use AAD pod identity](https://learn.microsoft.com/azure/aks/use-azure-ad-pod-identity) for more details on AAD pod identity integration.')
 param podIdentityProfile resourceInput<'Microsoft.ContainerService/managedClusters@2025-10-01'>.properties.podIdentityProfile?
 
-@description('Optional. Whether the The OIDC issuer profile of the Managed Cluster is enabled.')
+@description('Optional. Whether the OIDC issuer profile of the Managed Cluster is enabled.')
 param enableOidcIssuerProfile bool = false
 
 @description('Optional. Security profile for the managed cluster.')
@@ -784,7 +784,7 @@ resource managedCluster_roleAssignments 'Microsoft.Authorization/roleAssignments
       description: roleAssignment.?description
       principalType: roleAssignment.?principalType
       condition: roleAssignment.?condition
-      conditionVersion: !empty(roleAssignment.?condition) ? (roleAssignment.?conditionVersion ?? '2.0') : null // Must only be set if condtion is set
+      conditionVersion: !empty(roleAssignment.?condition) ? (roleAssignment.?conditionVersion ?? '2.0') : null // Must only be set if condition is set
       delegatedManagedIdentityResourceId: roleAssignment.?delegatedManagedIdentityResourceId
     }
     scope: managedCluster
@@ -792,11 +792,11 @@ resource managedCluster_roleAssignments 'Microsoft.Authorization/roleAssignments
 ]
 
 resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' existing = if (publicNetworkAccess != 'Disabled' && enableDnsZoneContributorRoleAssignment == true && dnsZoneResourceId != null && webApplicationRoutingEnabled) {
-  name: last(split((!empty(dnsZoneResourceId) ? any(dnsZoneResourceId) : '/dummmyZone'), '/'))!
+  name: last(split((!empty(dnsZoneResourceId) ? any(dnsZoneResourceId) : '/dummyZone'), '/'))!
 }
 
 resource privateDnsZone 'Microsoft.Network/privateDnsZones@2024-06-01' existing = if (publicNetworkAccess == 'Disabled' && enableDnsZoneContributorRoleAssignment == true && dnsZoneResourceId != null && webApplicationRoutingEnabled) {
-  name: last(split((!empty(dnsZoneResourceId) ? any(dnsZoneResourceId) : '/dummmyZone'), '/'))
+  name: last(split((!empty(dnsZoneResourceId) ? any(dnsZoneResourceId) : '/dummyZone'), '/'))
 }
 
 resource dnsZone_roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (publicNetworkAccess != 'Disabled' && enableDnsZoneContributorRoleAssignment == true && dnsZoneResourceId != null && webApplicationRoutingEnabled) {
@@ -819,14 +819,14 @@ resource dnsZone_roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04
 resource privateDnsZone_roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (publicNetworkAccess == 'Disabled' && enableDnsZoneContributorRoleAssignment == true && dnsZoneResourceId != null && webApplicationRoutingEnabled) {
   name: guid(
     privateDnsZone.id,
-    subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'befefa01-2a29-4197-83a8-272ff33ce314'),
-    'DNS Zone Contributor'
+    subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b12aa53e-6015-4669-85d0-8515ebb3ae7f'),
+    'Private DNS Zone Contributor'
   )
   properties: {
     roleDefinitionId: subscriptionResourceId(
       'Microsoft.Authorization/roleDefinitions',
-      'befefa01-2a29-4197-83a8-272ff33ce314'
-    ) // 'DNS Zone Contributor'
+      'b12aa53e-6015-4669-85d0-8515ebb3ae7f'
+    ) // 'Private DNS Zone Contributor'
     principalId: managedCluster.properties.ingressProfile.webAppRouting.identity.objectId
     principalType: 'ServicePrincipal'
   }
@@ -956,9 +956,6 @@ type agentPoolType = {
   @description('Optional. The maximum number of pods that can run on a node.')
   maxPods: int?
 
-  @description('Optional. The minimum number of pods that can run on a node.')
-  minPods: int?
-
   @description('Optional. The mode of the agent pool.')
   mode: resourceInput<'Microsoft.ContainerService/managedClusters/agentPools@2025-10-01'>.properties.mode?
 
@@ -1048,9 +1045,6 @@ type agentPoolType = {
 
   @description('Optional. The Windows profile of the agent pool.')
   windowsProfile: resourceInput<'Microsoft.ContainerService/managedClusters/agentPools@2025-10-01'>.properties.windowsProfile?
-
-  @description('Optional. The enable default telemetry of the agent pool.')
-  enableDefaultTelemetry: bool?
 }
 
 @export()
@@ -1069,7 +1063,7 @@ type extensionType = {
   releaseTrain: string?
 
   @description('Optional. The configuration protected settings of the extension.')
-  configurationProtectedSettings: resourceInput<'Microsoft.KubernetesConfiguration/fluxConfigurations@2025-04-01'>.properties.configurationProtectedSettings?
+  configurationProtectedSettings: resourceInput<'Microsoft.KubernetesConfiguration/extensions@2024-11-01'>.properties.configurationProtectedSettings?
 
   @description('Optional. The configuration settings of the extension.')
   configurationSettings: resourceInput<'Microsoft.KubernetesConfiguration/extensions@2024-11-01'>.properties.configurationSettings?
@@ -1082,7 +1076,7 @@ type extensionType = {
 }
 
 @export()
-@description('The type of a mainenance configuration.')
+@description('The type of a maintenance configuration.')
 type maintenanceConfigurationType = {
   @description('Required. Name of maintenance window.')
   name: ('aksManagedAutoUpgradeSchedule' | 'aksManagedNodeOSUpgradeSchedule')

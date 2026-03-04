@@ -93,15 +93,9 @@ module testDeployment '../../../main.bicep' = [
           maxCount: 3
           maxPods: 30
           minCount: 1
-          minPods: 2
           mode: 'User'
           name: 'userpool1'
-          nodeLabels: {}
           osDiskSizeGB: 128
-          osType: 'Linux'
-          scaleSetEvictionPolicy: 'Delete'
-          scaleSetPriority: 'Regular'
-          type: 'VirtualMachineScaleSets'
           vmSize: 'Standard_DS4_v2'
           vnetSubnetResourceId: '${nestedDependencies.outputs.vNetResourceId}/subnets/defaultSubnet'
         }

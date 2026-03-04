@@ -77,5 +77,5 @@ Time slots during the week when planned maintenance is allowed to proceed.
 | Output | Type | Description |
 | :-- | :-- | :-- |
 | `name` | string | The name of the maintenance configuration. |
-| `resourceGroupName` | string | The resource group the agent pool was deployed into. |
+| `resourceGroupName` | string | The resource group the maintenance configuration was deployed into. |
 | `resourceId` | string | The resource ID of the maintenance configuration. |

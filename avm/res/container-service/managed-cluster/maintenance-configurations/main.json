@@ -6,7 +6,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.41.2.15936",
-      "templateHash": "14996726530994398980"
+      "templateHash": "8154790704622632423"
     },
     "name": "Azure Kubernetes Service (AKS) Managed Cluster Maintenance Configurations",
     "description": "This module deploys an Azure Kubernetes Service (AKS) Managed Cluster Maintenance Configurations."
@@ -62,7 +62,7 @@
       "apiVersion": "2025-10-01",
       "name": "[parameters('managedClusterName')]"
     },
-    "aksManagedAutoUpgradeSchedule": {
+    "maintenanceConfiguration": {
       "type": "Microsoft.ContainerService/managedClusters/maintenanceConfigurations",
       "apiVersion": "2025-10-01",
       "name": "[format('{0}/{1}', parameters('managedClusterName'), parameters('name'))]",
@@ -91,7 +91,7 @@
     "resourceGroupName": {
       "type": "string",
       "metadata": {
-        "description": "The resource group the agent pool was deployed into."
+        "description": "The resource group the maintenance configuration was deployed into."
       },
       "value": "[resourceGroup().name]"
     }

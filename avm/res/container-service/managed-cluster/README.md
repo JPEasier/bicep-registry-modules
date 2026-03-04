@@ -96,15 +96,12 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
         maintenanceWindow: {
           durationHours: 4
           schedule: {
-            absoluteMonthly: '<absoluteMonthly>'
-            daily: '<daily>'
-            relativeMonthly: '<relativeMonthly>'
             weekly: {
               dayOfWeek: 'Sunday'
               intervalWeeks: 1
             }
           }
-          startDate: '2024-07-03'
+          startDate: '2026-07-03'
           startTime: '00:00'
           utcOffset: '+00:00'
         }
@@ -192,15 +189,12 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
           "maintenanceWindow": {
             "durationHours": 4,
             "schedule": {
-              "absoluteMonthly": "<absoluteMonthly>",
-              "daily": "<daily>",
-              "relativeMonthly": "<relativeMonthly>",
               "weekly": {
                 "dayOfWeek": "Sunday",
                 "intervalWeeks": 1
               }
             },
-            "startDate": "2024-07-03",
+            "startDate": "2026-07-03",
             "startTime": "00:00",
             "utcOffset": "+00:00"
           },
@@ -286,15 +280,12 @@ param maintenanceConfigurations = [
     maintenanceWindow: {
       durationHours: 4
       schedule: {
-        absoluteMonthly: '<absoluteMonthly>'
-        daily: '<daily>'
-        relativeMonthly: '<relativeMonthly>'
         weekly: {
           dayOfWeek: 'Sunday'
           intervalWeeks: 1
         }
       }
-      startDate: '2024-07-03'
+      startDate: '2026-07-03'
       startTime: '00:00'
       utcOffset: '+00:00'
     }
@@ -809,15 +800,9 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
         maxCount: 3
         maxPods: 30
         minCount: 1
-        minPods: 2
         mode: 'User'
         name: 'userpool1'
-        nodeLabels: {}
         osDiskSizeGB: 128
-        osType: 'Linux'
-        scaleSetEvictionPolicy: 'Delete'
-        scaleSetPriority: 'Regular'
-        type: 'VirtualMachineScaleSets'
         vmSize: 'Standard_DS4_v2'
       }
     ]
@@ -926,15 +911,9 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
           "maxCount": 3,
           "maxPods": 30,
           "minCount": 1,
-          "minPods": 2,
           "mode": "User",
           "name": "userpool1",
-          "nodeLabels": {},
           "osDiskSizeGB": 128,
-          "osType": "Linux",
-          "scaleSetEvictionPolicy": "Delete",
-          "scaleSetPriority": "Regular",
-          "type": "VirtualMachineScaleSets",
           "vmSize": "Standard_DS4_v2"
         }
       ]
@@ -1045,15 +1024,9 @@ param agentPools = [
     maxCount: 3
     maxPods: 30
     minCount: 1
-    minPods: 2
     mode: 'User'
     name: 'userpool1'
-    nodeLabels: {}
     osDiskSizeGB: 128
-    osType: 'Linux'
-    scaleSetEvictionPolicy: 'Delete'
-    scaleSetPriority: 'Regular'
-    type: 'VirtualMachineScaleSets'
     vmSize: 'Standard_DS4_v2'
   }
 ]
@@ -1186,14 +1159,12 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
         maxCount: 2
         maxPods: 30
         minCount: 1
-        minPods: 0
         mode: 'User'
         name: 'userpool1'
         nodeLabels: {
           environment: 'dev'
           workload: 'general'
         }
-        nodeTaints: []
         osDiskSizeGB: 30
         osDiskType: 'Ephemeral'
         osType: 'Linux'
@@ -1350,7 +1321,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
               intervalWeeks: 1
             }
           }
-          startDate: '2024-07-15'
+          startDate: '2026-07-15'
           startTime: '00:00'
           utcOffset: '+00:00'
         }
@@ -1365,7 +1336,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
               intervalWeeks: 1
             }
           }
-          startDate: '2024-07-15'
+          startDate: '2026-07-15'
           startTime: '02:00'
           utcOffset: '+00:00'
         }
@@ -1442,7 +1413,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
     upgradeSettings: {
       overrideSettings: {
         forceUpgrade: false
-        until: '2025-12-31T23:59:59Z'
+        until: '2027-12-31T23:59:59Z'
       }
     }
     webApplicationRoutingEnabled: true
@@ -1545,14 +1516,12 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
           "maxCount": 2,
           "maxPods": 30,
           "minCount": 1,
-          "minPods": 0,
           "mode": "User",
           "name": "userpool1",
           "nodeLabels": {
             "environment": "dev",
             "workload": "general"
           },
-          "nodeTaints": [],
           "osDiskSizeGB": 30,
           "osDiskType": "Ephemeral",
           "osType": "Linux",
@@ -1777,7 +1746,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
                 "intervalWeeks": 1
               }
             },
-            "startDate": "2024-07-15",
+            "startDate": "2026-07-15",
             "startTime": "00:00",
             "utcOffset": "+00:00"
           },
@@ -1792,7 +1761,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
                 "intervalWeeks": 1
               }
             },
-            "startDate": "2024-07-15",
+            "startDate": "2026-07-15",
             "startTime": "02:00",
             "utcOffset": "+00:00"
           },
@@ -1923,7 +1892,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
       "value": {
         "overrideSettings": {
           "forceUpgrade": false,
-          "until": "2025-12-31T23:59:59Z"
+          "until": "2027-12-31T23:59:59Z"
         }
       }
     },
@@ -2020,14 +1989,12 @@ param agentPools = [
     maxCount: 2
     maxPods: 30
     minCount: 1
-    minPods: 0
     mode: 'User'
     name: 'userpool1'
     nodeLabels: {
       environment: 'dev'
       workload: 'general'
     }
-    nodeTaints: []
     osDiskSizeGB: 30
     osDiskType: 'Ephemeral'
     osType: 'Linux'
@@ -2184,7 +2151,7 @@ param maintenanceConfigurations = [
           intervalWeeks: 1
         }
       }
-      startDate: '2024-07-15'
+      startDate: '2026-07-15'
       startTime: '00:00'
       utcOffset: '+00:00'
     }
@@ -2199,7 +2166,7 @@ param maintenanceConfigurations = [
           intervalWeeks: 1
         }
       }
-      startDate: '2024-07-15'
+      startDate: '2026-07-15'
       startTime: '02:00'
       utcOffset: '+00:00'
     }
@@ -2276,7 +2243,7 @@ param tags = {
 param upgradeSettings = {
   overrideSettings: {
     forceUpgrade: false
-    until: '2025-12-31T23:59:59Z'
+    until: '2027-12-31T23:59:59Z'
   }
 }
 param webApplicationRoutingEnabled = true
@@ -2346,15 +2313,9 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
         maxCount: 3
         maxPods: 30
         minCount: 1
-        minPods: 2
         mode: 'User'
         name: 'userpool1'
-        nodeLabels: {}
         osDiskSizeGB: 128
-        osType: 'Linux'
-        scaleSetEvictionPolicy: 'Delete'
-        scaleSetPriority: 'Regular'
-        type: 'VirtualMachineScaleSets'
         vmSize: 'Standard_DS4_v2'
         vnetSubnetResourceId: '<vnetSubnetResourceId>'
       }
@@ -2434,15 +2395,9 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
           "maxCount": 3,
           "maxPods": 30,
           "minCount": 1,
-          "minPods": 2,
           "mode": "User",
           "name": "userpool1",
-          "nodeLabels": {},
           "osDiskSizeGB": 128,
-          "osType": "Linux",
-          "scaleSetEvictionPolicy": "Delete",
-          "scaleSetPriority": "Regular",
-          "type": "VirtualMachineScaleSets",
           "vmSize": "Standard_DS4_v2",
           "vnetSubnetResourceId": "<vnetSubnetResourceId>"
         }
@@ -2526,15 +2481,9 @@ param agentPools = [
     maxCount: 3
     maxPods: 30
     minCount: 1
-    minPods: 2
     mode: 'User'
     name: 'userpool1'
-    nodeLabels: {}
     osDiskSizeGB: 128
-    osType: 'Linux'
-    scaleSetEvictionPolicy: 'Delete'
-    scaleSetPriority: 'Regular'
-    type: 'VirtualMachineScaleSets'
     vmSize: 'Standard_DS4_v2'
     vnetSubnetResourceId: '<vnetSubnetResourceId>'
   }
@@ -2610,16 +2559,10 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
         maxCount: 3
         maxPods: 50
         minCount: 3
-        minPods: 2
         mode: 'User'
         name: 'userpool1'
-        nodeLabels: {}
         osDiskSizeGB: 60
         osDiskType: 'Ephemeral'
-        osType: 'Linux'
-        scaleSetEvictionPolicy: 'Delete'
-        scaleSetPriority: 'Regular'
-        type: 'VirtualMachineScaleSets'
         vmSize: 'Standard_DS4_v2'
         vnetSubnetResourceId: '<vnetSubnetResourceId>'
       }
@@ -2688,7 +2631,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
               intervalWeeks: 1
             }
           }
-          startDate: '2024-07-15'
+          startDate: '2026-07-15'
           startTime: '00:00'
           utcOffset: '+00:00'
         }
@@ -2703,7 +2646,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
               intervalWeeks: 1
             }
           }
-          startDate: '2024-07-15'
+          startDate: '2026-07-15'
           startTime: '00:00'
           utcOffset: '+00:00'
         }
@@ -2796,16 +2739,10 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
           "maxCount": 3,
           "maxPods": 50,
           "minCount": 3,
-          "minPods": 2,
           "mode": "User",
           "name": "userpool1",
-          "nodeLabels": {},
           "osDiskSizeGB": 60,
           "osDiskType": "Ephemeral",
-          "osType": "Linux",
-          "scaleSetEvictionPolicy": "Delete",
-          "scaleSetPriority": "Regular",
-          "type": "VirtualMachineScaleSets",
           "vmSize": "Standard_DS4_v2",
           "vnetSubnetResourceId": "<vnetSubnetResourceId>"
         },
@@ -2886,7 +2823,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
                 "intervalWeeks": 1
               }
             },
-            "startDate": "2024-07-15",
+            "startDate": "2026-07-15",
             "startTime": "00:00",
             "utcOffset": "+00:00"
           },
@@ -2901,7 +2838,7 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
                 "intervalWeeks": 1
               }
             },
-            "startDate": "2024-07-15",
+            "startDate": "2026-07-15",
             "startTime": "00:00",
             "utcOffset": "+00:00"
           },
@@ -3004,16 +2941,10 @@ param agentPools = [
     maxCount: 3
     maxPods: 50
     minCount: 3
-    minPods: 2
     mode: 'User'
     name: 'userpool1'
-    nodeLabels: {}
     osDiskSizeGB: 60
     osDiskType: 'Ephemeral'
-    osType: 'Linux'
-    scaleSetEvictionPolicy: 'Delete'
-    scaleSetPriority: 'Regular'
-    type: 'VirtualMachineScaleSets'
     vmSize: 'Standard_DS4_v2'
     vnetSubnetResourceId: '<vnetSubnetResourceId>'
   }
@@ -3082,7 +3013,7 @@ param maintenanceConfigurations = [
           intervalWeeks: 1
         }
       }
-      startDate: '2024-07-15'
+      startDate: '2026-07-15'
       startTime: '00:00'
       utcOffset: '+00:00'
     }
@@ -3097,7 +3028,7 @@ param maintenanceConfigurations = [
           intervalWeeks: 1
         }
       }
-      startDate: '2024-07-15'
+      startDate: '2026-07-15'
       startTime: '00:00'
       utcOffset: '+00:00'
     }
@@ -3175,9 +3106,9 @@ param tags = {
 | [`dnsPrefix`](#parameter-dnsprefix) | string | Specifies the DNS prefix specified when creating the managed cluster. |
 | [`dnsServiceIP`](#parameter-dnsserviceip) | string | Specifies the IP address assigned to the Kubernetes DNS service. It must be within the Kubernetes service address range specified in serviceCidr. |
 | [`dnsZoneResourceId`](#parameter-dnszoneresourceid) | string | Specifies the resource ID of connected DNS zone. It will be ignored if `webApplicationRoutingEnabled` is set to `false`. |
-| [`enableDnsZoneContributorRoleAssignment`](#parameter-enablednszonecontributorroleassignment) | bool | Specifies whether assing the DNS zone contributor role to the cluster service principal. It will be ignored if `webApplicationRoutingEnabled` is set to `false` or `dnsZoneResourceId` not provided. |
+| [`enableDnsZoneContributorRoleAssignment`](#parameter-enablednszonecontributorroleassignment) | bool | Specifies whether assigning the DNS zone contributor role to the cluster service principal. It will be ignored if `webApplicationRoutingEnabled` is set to `false` or `dnsZoneResourceId` not provided. |
 | [`enableKeyvaultSecretsProvider`](#parameter-enablekeyvaultsecretsprovider) | bool | Specifies whether the KeyvaultSecretsProvider add-on is enabled or not. |
-| [`enableOidcIssuerProfile`](#parameter-enableoidcissuerprofile) | bool | Whether the The OIDC issuer profile of the Managed Cluster is enabled. |
+| [`enableOidcIssuerProfile`](#parameter-enableoidcissuerprofile) | bool | Whether the OIDC issuer profile of the Managed Cluster is enabled. |
 | [`enableRBAC`](#parameter-enablerbac) | bool | Whether to enable Kubernetes Role-Based Access Control. |
 | [`enableSecretRotation`](#parameter-enablesecretrotation) | bool | Specifies whether the KeyvaultSecretsProvider add-on uses secret rotation. |
 | [`enableStorageProfileBlobCSIDriver`](#parameter-enablestorageprofileblobcsidriver) | bool | Whether the AzureBlob CSI Driver for the storage profile is enabled. |
@@ -3265,7 +3196,6 @@ Properties of the primary agent pool.
 | [`capacityReservationGroupResourceId`](#parameter-primaryagentpoolprofilescapacityreservationgroupresourceid) | string | AKS will associate the specified agent pool with the Capacity Reservation Group. |
 | [`count`](#parameter-primaryagentpoolprofilescount) | int | The number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). |
 | [`enableAutoScaling`](#parameter-primaryagentpoolprofilesenableautoscaling) | bool | Whether to enable auto-scaling for the agent pool. |
-| [`enableDefaultTelemetry`](#parameter-primaryagentpoolprofilesenabledefaulttelemetry) | bool | The enable default telemetry of the agent pool. |
 | [`enableEncryptionAtHost`](#parameter-primaryagentpoolprofilesenableencryptionathost) | bool | Whether to enable encryption at host for the agent pool. |
 | [`enableFIPS`](#parameter-primaryagentpoolprofilesenablefips) | bool | Whether to enable FIPS for the agent pool. |
 | [`enableNodePublicIP`](#parameter-primaryagentpoolprofilesenablenodepublicip) | bool | Whether to enable node public IP for the agent pool. |
@@ -3282,7 +3212,6 @@ Properties of the primary agent pool.
 | [`maxPods`](#parameter-primaryagentpoolprofilesmaxpods) | int | The maximum number of pods that can run on a node. |
 | [`messageOfTheDay`](#parameter-primaryagentpoolprofilesmessageoftheday) | string | A message of the day will be a multi-line message that is prepended to the command prompt and the SSH login message. |
 | [`minCount`](#parameter-primaryagentpoolprofilesmincount) | int | The minimum number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). |
-| [`minPods`](#parameter-primaryagentpoolprofilesminpods) | int | The minimum number of pods that can run on a node. |
 | [`mode`](#parameter-primaryagentpoolprofilesmode) | string | The mode of the agent pool. |
 | [`networkProfile`](#parameter-primaryagentpoolprofilesnetworkprofile) | object | Network profile to be used for agent pool nodes. |
 | [`nodeLabels`](#parameter-primaryagentpoolprofilesnodelabels) | object | The node labels of the agent pool. |
@@ -3343,13 +3272,6 @@ The number of agents (VMs) to host docker containers. Allowed values must be in 
 ### Parameter: `primaryAgentPoolProfiles.enableAutoScaling`
 
 Whether to enable auto-scaling for the agent pool.
-
-- Required: No
-- Type: bool
-
-### Parameter: `primaryAgentPoolProfiles.enableDefaultTelemetry`
-
-The enable default telemetry of the agent pool.
 
 - Required: No
 - Type: bool
@@ -3462,13 +3384,6 @@ A message of the day will be a multi-line message that is prepended to the comma
 ### Parameter: `primaryAgentPoolProfiles.minCount`
 
 The minimum number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive).
-
-- Required: No
-- Type: int
-
-### Parameter: `primaryAgentPoolProfiles.minPods`
-
-The minimum number of pods that can run on a node.
 
 - Required: No
 - Type: int
@@ -3747,7 +3662,6 @@ Define one or more secondary/additional agent pools.
 | [`capacityReservationGroupResourceId`](#parameter-agentpoolscapacityreservationgroupresourceid) | string | AKS will associate the specified agent pool with the Capacity Reservation Group. |
 | [`count`](#parameter-agentpoolscount) | int | The number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). |
 | [`enableAutoScaling`](#parameter-agentpoolsenableautoscaling) | bool | Whether to enable auto-scaling for the agent pool. |
-| [`enableDefaultTelemetry`](#parameter-agentpoolsenabledefaulttelemetry) | bool | The enable default telemetry of the agent pool. |
 | [`enableEncryptionAtHost`](#parameter-agentpoolsenableencryptionathost) | bool | Whether to enable encryption at host for the agent pool. |
 | [`enableFIPS`](#parameter-agentpoolsenablefips) | bool | Whether to enable FIPS for the agent pool. |
 | [`enableNodePublicIP`](#parameter-agentpoolsenablenodepublicip) | bool | Whether to enable node public IP for the agent pool. |
@@ -3764,7 +3678,6 @@ Define one or more secondary/additional agent pools.
 | [`maxPods`](#parameter-agentpoolsmaxpods) | int | The maximum number of pods that can run on a node. |
 | [`messageOfTheDay`](#parameter-agentpoolsmessageoftheday) | string | A message of the day will be a multi-line message that is prepended to the command prompt and the SSH login message. |
 | [`minCount`](#parameter-agentpoolsmincount) | int | The minimum number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). |
-| [`minPods`](#parameter-agentpoolsminpods) | int | The minimum number of pods that can run on a node. |
 | [`mode`](#parameter-agentpoolsmode) | string | The mode of the agent pool. |
 | [`networkProfile`](#parameter-agentpoolsnetworkprofile) | object | Network profile to be used for agent pool nodes. |
 | [`nodeLabels`](#parameter-agentpoolsnodelabels) | object | The node labels of the agent pool. |
@@ -3825,13 +3738,6 @@ The number of agents (VMs) to host docker containers. Allowed values must be in 
 ### Parameter: `agentPools.enableAutoScaling`
 
 Whether to enable auto-scaling for the agent pool.
-
-- Required: No
-- Type: bool
-
-### Parameter: `agentPools.enableDefaultTelemetry`
-
-The enable default telemetry of the agent pool.
 
 - Required: No
 - Type: bool
@@ -3944,13 +3850,6 @@ A message of the day will be a multi-line message that is prepended to the comma
 ### Parameter: `agentPools.minCount`
 
 The minimum number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive).
-
-- Required: No
-- Type: int
-
-### Parameter: `agentPools.minPods`
-
-The minimum number of pods that can run on a node.
 
 - Required: No
 - Type: int
@@ -4452,7 +4351,7 @@ Specifies the resource ID of connected DNS zone. It will be ignored if `webAppli
 
 ### Parameter: `enableDnsZoneContributorRoleAssignment`
 
-Specifies whether assing the DNS zone contributor role to the cluster service principal. It will be ignored if `webApplicationRoutingEnabled` is set to `false` or `dnsZoneResourceId` not provided.
+Specifies whether assigning the DNS zone contributor role to the cluster service principal. It will be ignored if `webApplicationRoutingEnabled` is set to `false` or `dnsZoneResourceId` not provided.
 
 - Required: No
 - Type: bool
@@ -4468,7 +4367,7 @@ Specifies whether the KeyvaultSecretsProvider add-on is enabled or not.
 
 ### Parameter: `enableOidcIssuerProfile`
 
-Whether the The OIDC issuer profile of the Managed Cluster is enabled.
+Whether the OIDC issuer profile of the Managed Cluster is enabled.
 
 - Required: No
 - Type: bool

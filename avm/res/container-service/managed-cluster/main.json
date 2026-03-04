@@ -6,7 +6,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.41.2.15936",
-      "templateHash": "4133574702064237491"
+      "templateHash": "15814935435946928871"
     },
     "name": "Azure Kubernetes Service (AKS) Managed Clusters",
     "description": "This module deploys an Azure Kubernetes Service (AKS) Managed Cluster."
@@ -190,13 +190,6 @@
           "nullable": true,
           "metadata": {
             "description": "Optional. The maximum number of pods that can run on a node."
-          }
-        },
-        "minPods": {
-          "type": "int",
-          "nullable": true,
-          "metadata": {
-            "description": "Optional. The minimum number of pods that can run on a node."
           }
         },
         "mode": {
@@ -453,13 +446,6 @@
             "description": "Optional. The Windows profile of the agent pool."
           },
           "nullable": true
-        },
-        "enableDefaultTelemetry": {
-          "type": "bool",
-          "nullable": true,
-          "metadata": {
-            "description": "Optional. The enable default telemetry of the agent pool."
-          }
         }
       },
       "metadata": {
@@ -502,7 +488,7 @@
           "type": "object",
           "metadata": {
             "__bicep_resource_derived_type!": {
-              "source": "Microsoft.KubernetesConfiguration/fluxConfigurations@2025-04-01#properties/properties/properties/configurationProtectedSettings"
+              "source": "Microsoft.KubernetesConfiguration/extensions@2024-11-01#properties/properties/properties/configurationProtectedSettings"
             },
             "description": "Optional. The configuration protected settings of the extension."
           },
@@ -591,7 +577,7 @@
       },
       "metadata": {
         "__bicep_export!": true,
-        "description": "The type of a mainenance configuration."
+        "description": "The type of a maintenance configuration."
       }
     },
     "diagnosticSettingFullType": {
@@ -1280,7 +1266,7 @@
       "type": "bool",
       "defaultValue": true,
       "metadata": {
-        "description": "Optional. Specifies whether assing the DNS zone contributor role to the cluster service principal. It will be ignored if `webApplicationRoutingEnabled` is set to `false` or `dnsZoneResourceId` not provided."
+        "description": "Optional. Specifies whether assigning the DNS zone contributor role to the cluster service principal. It will be ignored if `webApplicationRoutingEnabled` is set to `false` or `dnsZoneResourceId` not provided."
       }
     },
     "ingressApplicationGatewayEnabled": {
@@ -1382,7 +1368,7 @@
       "type": "bool",
       "defaultValue": false,
       "metadata": {
-        "description": "Optional. Whether the The OIDC issuer profile of the Managed Cluster is enabled."
+        "description": "Optional. Whether the OIDC issuer profile of the Managed Cluster is enabled."
       }
     },
     "securityProfile": {
@@ -1867,21 +1853,21 @@
       "existing": true,
       "type": "Microsoft.Network/dnsZones",
       "apiVersion": "2018-05-01",
-      "name": "[last(split(if(not(empty(parameters('dnsZoneResourceId'))), parameters('dnsZoneResourceId'), '/dummmyZone'), '/'))]"
+      "name": "[last(split(if(not(empty(parameters('dnsZoneResourceId'))), parameters('dnsZoneResourceId'), '/dummyZone'), '/'))]"
     },
     "privateDnsZone": {
       "condition": "[and(and(and(equals(parameters('publicNetworkAccess'), 'Disabled'), equals(parameters('enableDnsZoneContributorRoleAssignment'), true())), not(equals(parameters('dnsZoneResourceId'), null()))), parameters('webApplicationRoutingEnabled'))]",
       "existing": true,
       "type": "Microsoft.Network/privateDnsZones",
       "apiVersion": "2024-06-01",
-      "name": "[last(split(if(not(empty(parameters('dnsZoneResourceId'))), parameters('dnsZoneResourceId'), '/dummmyZone'), '/'))]"
+      "name": "[last(split(if(not(empty(parameters('dnsZoneResourceId'))), parameters('dnsZoneResourceId'), '/dummyZone'), '/'))]"
     },
     "dnsZone_roleAssignment": {
       "condition": "[and(and(and(not(equals(parameters('publicNetworkAccess'), 'Disabled')), equals(parameters('enableDnsZoneContributorRoleAssignment'), true())), not(equals(parameters('dnsZoneResourceId'), null()))), parameters('webApplicationRoutingEnabled'))]",
       "type": "Microsoft.Authorization/roleAssignments",
       "apiVersion": "2022-04-01",
-      "scope": "[resourceId('Microsoft.Network/dnsZones', last(split(if(not(empty(parameters('dnsZoneResourceId'))), parameters('dnsZoneResourceId'), '/dummmyZone'), '/')))]",
-      "name": "[guid(resourceId('Microsoft.Network/dnsZones', last(split(if(not(empty(parameters('dnsZoneResourceId'))), parameters('dnsZoneResourceId'), '/dummmyZone'), '/'))), subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'befefa01-2a29-4197-83a8-272ff33ce314'), 'DNS Zone Contributor')]",
+      "scope": "[resourceId('Microsoft.Network/dnsZones', last(split(if(not(empty(parameters('dnsZoneResourceId'))), parameters('dnsZoneResourceId'), '/dummyZone'), '/')))]",
+      "name": "[guid(resourceId('Microsoft.Network/dnsZones', last(split(if(not(empty(parameters('dnsZoneResourceId'))), parameters('dnsZoneResourceId'), '/dummyZone'), '/'))), subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'befefa01-2a29-4197-83a8-272ff33ce314'), 'DNS Zone Contributor')]",
       "properties": {
         "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'befefa01-2a29-4197-83a8-272ff33ce314')]",
         "principalId": "[reference('managedCluster').ingressProfile.webAppRouting.identity.objectId]",
@@ -1895,10 +1881,10 @@
       "condition": "[and(and(and(equals(parameters('publicNetworkAccess'), 'Disabled'), equals(parameters('enableDnsZoneContributorRoleAssignment'), true())), not(equals(parameters('dnsZoneResourceId'), null()))), parameters('webApplicationRoutingEnabled'))]",
       "type": "Microsoft.Authorization/roleAssignments",
       "apiVersion": "2022-04-01",
-      "scope": "[resourceId('Microsoft.Network/privateDnsZones', last(split(if(not(empty(parameters('dnsZoneResourceId'))), parameters('dnsZoneResourceId'), '/dummmyZone'), '/')))]",
-      "name": "[guid(resourceId('Microsoft.Network/privateDnsZones', last(split(if(not(empty(parameters('dnsZoneResourceId'))), parameters('dnsZoneResourceId'), '/dummmyZone'), '/'))), subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'befefa01-2a29-4197-83a8-272ff33ce314'), 'DNS Zone Contributor')]",
+      "scope": "[resourceId('Microsoft.Network/privateDnsZones', last(split(if(not(empty(parameters('dnsZoneResourceId'))), parameters('dnsZoneResourceId'), '/dummyZone'), '/')))]",
+      "name": "[guid(resourceId('Microsoft.Network/privateDnsZones', last(split(if(not(empty(parameters('dnsZoneResourceId'))), parameters('dnsZoneResourceId'), '/dummyZone'), '/'))), subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b12aa53e-6015-4669-85d0-8515ebb3ae7f'), 'Private DNS Zone Contributor')]",
       "properties": {
-        "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'befefa01-2a29-4197-83a8-272ff33ce314')]",
+        "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b12aa53e-6015-4669-85d0-8515ebb3ae7f')]",
         "principalId": "[reference('managedCluster').ingressProfile.webAppRouting.identity.objectId]",
         "principalType": "ServicePrincipal"
       },
@@ -1944,7 +1930,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.41.2.15936",
-              "templateHash": "14996726530994398980"
+              "templateHash": "8154790704622632423"
             },
             "name": "Azure Kubernetes Service (AKS) Managed Cluster Maintenance Configurations",
             "description": "This module deploys an Azure Kubernetes Service (AKS) Managed Cluster Maintenance Configurations."
@@ -2000,7 +1986,7 @@
               "apiVersion": "2025-10-01",
               "name": "[parameters('managedClusterName')]"
             },
-            "aksManagedAutoUpgradeSchedule": {
+            "maintenanceConfiguration": {
               "type": "Microsoft.ContainerService/managedClusters/maintenanceConfigurations",
               "apiVersion": "2025-10-01",
               "name": "[format('{0}/{1}', parameters('managedClusterName'), parameters('name'))]",
@@ -2029,7 +2015,7 @@
             "resourceGroupName": {
               "type": "string",
               "metadata": {
-                "description": "The resource group the agent pool was deployed into."
+                "description": "The resource group the maintenance configuration was deployed into."
               },
               "value": "[resourceGroup().name]"
             }
