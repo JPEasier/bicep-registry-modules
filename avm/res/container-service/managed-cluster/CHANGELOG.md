@@ -6,7 +6,7 @@ The latest version of the changelog can be found [here](https://github.com/Azure
 
 ### Changes
 
-- fix: Cilium + BYO pod subnet incompatibility
+- update API versions to `2025-10-01` in main module and child modules
 
 ### Bug Fixes
 
