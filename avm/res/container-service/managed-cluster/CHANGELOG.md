@@ -2,6 +2,24 @@
 
 The latest version of the changelog can be found [here](https://github.com/Azure/bicep-registry-modules/blob/main/avm/res/container-service/managed-cluster/CHANGELOG.md).
 
+## 0.13.0
+
+### Bug Fixes
+
+- Fixed Cilium + BYO pod subnet incompatibility ([#3860](https://github.com/Azure/bicep-registry-modules/issues/3860)). When `networkDataplane` is set to `cilium` and any agent pool specifies a `podSubnetResourceId`, the module no longer forces `networkPluginMode` to `overlay`. The `overlay` default is only applied when Cilium is used without BYO pod subnets.
+
+### Clarifications (No Code Changes)
+
+- **Node drain timeout** ([#6612](https://github.com/Azure/bicep-registry-modules/issues/6612)): The `drainTimeoutInMinutes` setting is already available via the `upgradeSettings` property on both `primaryAgentPoolProfiles` and `agentPools`. No additional parameter is needed.
+- **Dual-stack support** ([#3594](https://github.com/Azure/bicep-registry-modules/issues/3594)): Parameters `ipFamilies`, `serviceCidrs`, and `podCidrs` were added in v0.12.0 and fully support dual-stack networking.
+- **Prometheus monitoring** ([#4466](https://github.com/Azure/bicep-registry-modules/issues/4466)): The `azureMonitorProfile` parameter is a full pass-through from the API schema. Data Collection Rules (DCR) and Data Collection Rule Associations (DCRA) are separate Azure resources and must be created outside of this module.
+- **Container Insights logging profile** ([#6065](https://github.com/Azure/bicep-registry-modules/issues/6065)): Container Insights log collection settings can be configured via the `azureMonitorProfile` parameter, which accepts the full API schema for `Microsoft.ContainerService/managedClusters@2025-09-01`.
+- **Migration from v0.1.x to v0.8+** ([#4479](https://github.com/Azure/bicep-registry-modules/issues/4479)): Breaking changes were documented in the v0.12.0 changelog. Users upgrading from older versions should review the breaking changes section carefully.
+
+### Breaking Changes
+
+- None
+
 ## 0.12.0
 
 ### Changes

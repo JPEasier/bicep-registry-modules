@@ -368,6 +368,11 @@ var builtInRoleNames = {
   )
 }
 
+var hasPodSubnet = !empty(filter(primaryAgentPoolProfiles, pool => pool.?podSubnetResourceId != null)) || !empty(filter(
+  agentPools ?? [],
+  pool => pool.?podSubnetResourceId != null
+))
+
 var formattedRoleAssignments = [
   for (roleAssignment, index) in (roleAssignments ?? []): union(roleAssignment, {
     roleDefinitionId: builtInRoleNames[?roleAssignment.roleDefinitionIdOrName] ?? (contains(
@@ -576,7 +581,7 @@ resource managedCluster 'Microsoft.ContainerService/managedClusters@2025-09-01' 
       staticEgressGatewayProfile: staticEgressGatewayProfile
       networkDataplane: networkDataplane
       networkPlugin: networkPlugin
-      networkPluginMode: networkDataplane == 'cilium' ? 'overlay' : networkPluginMode
+      networkPluginMode: networkDataplane == 'cilium' && !hasPodSubnet ? 'overlay' : networkPluginMode
       networkPolicy: networkDataplane == 'cilium' ? 'cilium' : networkPolicy
       podCidr: podCidr
       serviceCidr: serviceCidr

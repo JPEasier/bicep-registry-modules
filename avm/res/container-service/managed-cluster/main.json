@@ -6,7 +6,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.41.2.15936",
-      "templateHash": "14083387033811353354"
+      "templateHash": "7253650277223236511"
     },
     "name": "Azure Kubernetes Service (AKS) Managed Clusters",
     "description": "This module deploys an Azure Kubernetes Service (AKS) Managed Cluster."
@@ -1641,7 +1641,8 @@
       "Reader": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'acdd72a7-3385-48ef-bd42-f606fba81ae7')]",
       "Role Based Access Control Administrator": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'f58310d9-a9f6-439a-9e8d-f62e7b41a168')]",
       "User Access Administrator": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '18d7d88d-d35e-4fb5-a5c3-7773c20a72d9')]"
-    }
+    },
+    "hasPodSubnet": "[or(not(empty(filter(parameters('primaryAgentPoolProfiles'), lambda('pool', not(equals(tryGet(lambdaVariables('pool'), 'podSubnetResourceId'), null())))))), not(empty(filter(coalesce(parameters('agentPools'), createArray()), lambda('pool', not(equals(tryGet(lambdaVariables('pool'), 'podSubnetResourceId'), null())))))))]"
   },
   "resources": {
     "avmTelemetry": {
@@ -1747,7 +1748,7 @@
           "staticEgressGatewayProfile": "[parameters('staticEgressGatewayProfile')]",
           "networkDataplane": "[parameters('networkDataplane')]",
           "networkPlugin": "[parameters('networkPlugin')]",
-          "networkPluginMode": "[if(equals(parameters('networkDataplane'), 'cilium'), 'overlay', parameters('networkPluginMode'))]",
+          "networkPluginMode": "[if(and(equals(parameters('networkDataplane'), 'cilium'), not(variables('hasPodSubnet'))), 'overlay', parameters('networkPluginMode'))]",
           "networkPolicy": "[if(equals(parameters('networkDataplane'), 'cilium'), 'cilium', parameters('networkPolicy'))]",
           "podCidr": "[parameters('podCidr')]",
           "serviceCidr": "[parameters('serviceCidr')]",
