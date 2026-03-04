@@ -4,6 +4,10 @@ The latest version of the changelog can be found [here](https://github.com/Azure
 
 ## 0.13.0
 
+### Changes
+
+- fix: Cilium + BYO pod subnet incompatibility
+
 ### Bug Fixes
 
 - Fixed Cilium + BYO pod subnet incompatibility ([#3860](https://github.com/Azure/bicep-registry-modules/issues/3860)). When `networkDataplane` is set to `cilium` and any agent pool specifies a `podSubnetResourceId`, the module no longer forces `networkPluginMode` to `overlay`. The `overlay` default is only applied when Cilium is used without BYO pod subnets.

@@ -127,17 +127,12 @@ module testDeployment '../../../main.bicep' = [
           maxCount: 3
           maxPods: 50
           minCount: 3
-          minPods: 2
           mode: 'User'
           name: 'userpool2'
-          nodeLabels: {}
           osDiskType: 'Ephemeral'
           osDiskSizeGB: 60
-          osType: 'Linux'
-          scaleSetEvictionPolicy: 'Delete'
-          scaleSetPriority: 'Regular'
-          type: 'VirtualMachineScaleSets'
           vmSize: 'Standard_DS4_v2'
+          vnetSubnetResourceId: '${nestedDependencies.outputs.vNetResourceId}/subnets/defaultSubnet'
         }
       ]
       autoUpgradeProfile: {

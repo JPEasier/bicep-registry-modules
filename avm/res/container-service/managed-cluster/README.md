@@ -2632,17 +2632,12 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
         maxCount: 3
         maxPods: 50
         minCount: 3
-        minPods: 2
         mode: 'User'
         name: 'userpool2'
-        nodeLabels: {}
         osDiskSizeGB: 60
         osDiskType: 'Ephemeral'
-        osType: 'Linux'
-        scaleSetEvictionPolicy: 'Delete'
-        scaleSetPriority: 'Regular'
-        type: 'VirtualMachineScaleSets'
         vmSize: 'Standard_DS4_v2'
+        vnetSubnetResourceId: '<vnetSubnetResourceId>'
       }
     ]
     apiServerAccessProfile: {
@@ -2823,17 +2818,12 @@ module managedCluster 'br/public:avm/res/container-service/managed-cluster:<vers
           "maxCount": 3,
           "maxPods": 50,
           "minCount": 3,
-          "minPods": 2,
           "mode": "User",
           "name": "userpool2",
-          "nodeLabels": {},
           "osDiskSizeGB": 60,
           "osDiskType": "Ephemeral",
-          "osType": "Linux",
-          "scaleSetEvictionPolicy": "Delete",
-          "scaleSetPriority": "Regular",
-          "type": "VirtualMachineScaleSets",
-          "vmSize": "Standard_DS4_v2"
+          "vmSize": "Standard_DS4_v2",
+          "vnetSubnetResourceId": "<vnetSubnetResourceId>"
         }
       ]
     },
@@ -3036,17 +3026,12 @@ param agentPools = [
     maxCount: 3
     maxPods: 50
     minCount: 3
-    minPods: 2
     mode: 'User'
     name: 'userpool2'
-    nodeLabels: {}
     osDiskSizeGB: 60
     osDiskType: 'Ephemeral'
-    osType: 'Linux'
-    scaleSetEvictionPolicy: 'Delete'
-    scaleSetPriority: 'Regular'
-    type: 'VirtualMachineScaleSets'
     vmSize: 'Standard_DS4_v2'
+    vnetSubnetResourceId: '<vnetSubnetResourceId>'
   }
 ]
 param apiServerAccessProfile = {
