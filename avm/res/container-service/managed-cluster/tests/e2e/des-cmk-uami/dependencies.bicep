@@ -63,6 +63,12 @@ resource waitForDeployment 'Microsoft.Resources/deploymentScripts@2023-08-01' = 
   name: waitDeploymentScriptName
   location: location
   kind: 'AzurePowerShell'
+  identity: {
+    type: 'UserAssigned'
+    userAssignedIdentities: {
+      '${managedIdentity.id}': {}
+    }
+  }
   properties: {
     retentionInterval: 'PT1H'
     azPowerShellVersion: '11.0'
