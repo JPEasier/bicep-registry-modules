@@ -1045,6 +1045,9 @@ type agentPoolType = {
 
   @description('Optional. The Windows profile of the agent pool.')
   windowsProfile: resourceInput<'Microsoft.ContainerService/managedClusters/agentPools@2025-10-01'>.properties.windowsProfile?
+
+  @description('Optional. The enable default telemetry of the agent pool.')
+  enableDefaultTelemetry: bool?
 }
 
 @export()

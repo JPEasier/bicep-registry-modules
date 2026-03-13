@@ -20,7 +20,7 @@ resource managedCluster 'Microsoft.ContainerService/managedClusters@2025-10-01' 
   name: managedClusterName
 }
 
-resource maintenanceConfiguration 'Microsoft.ContainerService/managedClusters/maintenanceConfigurations@2025-10-01' = {
+resource aksManagedAutoUpgradeSchedule 'Microsoft.ContainerService/managedClusters/maintenanceConfigurations@2025-10-01' = {
   name: name
   parent: managedCluster
   properties: {

@@ -40,7 +40,7 @@ The following section provides usage examples for the module, which were used to
 
 >**Note**: To reference the module, please use the following syntax `br/public:avm/res/container-service/managed-cluster:<version>`.
 
-- [Using only defaults and use AKS Automatic mode (PREVIEW)](#example-1-using-only-defaults-and-use-aks-automatic-mode-preview)
+- [Using only defaults and use AKS Automatic mode](#example-1-using-only-defaults-and-use-aks-automatic-mode)
 - [Using only defaults](#example-2-using-only-defaults)
 - [Enabling encryption via a Disk Encryption Set (DES) using Customer-Managed-Keys (CMK) and a User-Assigned Identity](#example-3-enabling-encryption-via-a-disk-encryption-set-des-using-customer-managed-keys-cmk-and-a-user-assigned-identity)
 - [Using Istio Service Mesh add-on](#example-4-using-istio-service-mesh-add-on)
@@ -49,14 +49,13 @@ The following section provides usage examples for the module, which were used to
 - [Using Private Cluster.](#example-7-using-private-cluster)
 - [WAF-aligned](#example-8-waf-aligned)
 
-### Example 1: _Using only defaults and use AKS Automatic mode (PREVIEW)_
+### Example 1: _Using only defaults and use AKS Automatic mode_
 
-This instance deploys the module with the set of automatic parameters.'
+This instance deploys the module with the set of automatic parameters.
 
-Node autoprovisioning (NAP) for AKS is currently in PREVIEW.
-Register the NodeAutoProvisioningPreview feature flag using the az feature register command.
-
-MICROSOFT MAY NOT PROVIDE SUPPORT FOR THIS, PLEASE CHECK THE [PRODUCT DOCS](https://learn.microsoft.com/en-us/azure/aks/node-autoprovision?tabs=azure-cli#enable-node-autoprovisioning) FOR CLARIFICATION.
+AKS Automatic provides an opinionated, fully-managed cluster experience that automates node provisioning,
+scaling, security, and other operational tasks. For more information, see the
+[AKS Automatic documentation](https://learn.microsoft.com/azure/aks/intro-aks-automatic).
 
 
 You can find the full example and the setup of its dependencies in the deployment test folder path [/tests/e2e/automatic]
