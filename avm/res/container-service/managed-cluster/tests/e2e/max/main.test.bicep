@@ -136,9 +136,7 @@ module testDeployment '../../../main.bicep' = [
           maxCount: 2
           maxPods: 30
           minCount: 1
-          minPods: 0
           mode: 'User'
-          nodeTaints: []
           scaleSetEvictionPolicy: 'Delete'
           upgradeSettings: {
             maxSurge: '50%'
@@ -179,7 +177,7 @@ module testDeployment '../../../main.bicep' = [
             }
             durationHours: 4
             utcOffset: '+00:00'
-            startDate: '2024-07-15'
+            startDate: '2026-07-15'
             startTime: '00:00'
           }
         }
@@ -194,7 +192,7 @@ module testDeployment '../../../main.bicep' = [
             }
             durationHours: 6
             utcOffset: '+00:00'
-            startDate: '2024-07-15'
+            startDate: '2026-07-15'
             startTime: '02:00'
           }
         }
@@ -325,7 +323,7 @@ module testDeployment '../../../main.bicep' = [
       upgradeSettings: {
         overrideSettings: {
           forceUpgrade: false
-          until: '2025-12-31T23:59:59Z'
+          until: '2027-12-31T23:59:59Z'
         }
       }
       diskEncryptionSetResourceId: nestedDependencies.outputs.diskEncryptionSetResourceId

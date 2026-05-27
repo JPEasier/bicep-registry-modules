@@ -331,7 +331,7 @@ module registry 'br/public:avm/res/container-registry/registry:<version>' = {
     roleAssignmentMode: 'AbacRepositoryPermissions'
     roleAssignments: [
       {
-        name: '8f8b1c39-827f-43e6-a457-98bb15b5dbdf'
+        name: '<name>'
         principalId: '<principalId>'
         principalType: 'ServicePrincipal'
         roleDefinitionIdOrName: 'Owner'
@@ -536,7 +536,7 @@ module registry 'br/public:avm/res/container-registry/registry:<version>' = {
     "roleAssignments": {
       "value": [
         {
-          "name": "8f8b1c39-827f-43e6-a457-98bb15b5dbdf",
+          "name": "<name>",
           "principalId": "<principalId>",
           "principalType": "ServicePrincipal",
           "roleDefinitionIdOrName": "Owner"
@@ -723,7 +723,7 @@ param replications = [
 param roleAssignmentMode = 'AbacRepositoryPermissions'
 param roleAssignments = [
   {
-    name: '8f8b1c39-827f-43e6-a457-98bb15b5dbdf'
+    name: '<name>'
     principalId: '<principalId>'
     principalType: 'ServicePrincipal'
     roleDefinitionIdOrName: 'Owner'
